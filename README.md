@@ -62,6 +62,8 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - Individual post-secondary education institutions are placed at a single point matching the registered institutional address, which may not reflect the actual spatial distribution of students across multiple campuses or satellite facilities. Per-faculty placement is planned for a future update.
 - Inland-water bathymetry (rivers / lakes / reservoirs) is included via a flat −4 m depth index. **Coastal bathymetry (Taiwan Strait + Pacific)** is scheduled for a v2 release once an offshore depth source is registered.
 - Special demand currently covers only airports and post-secondary education. Hospitals (NHI register), military bases (MND garrison roster), tourism attractions (景點 / national scenic areas), sport venues, and cultural centers will be added as Phase E data lands.
+- Some coastal tiles on map edges do not render correctly due to a land mask polygon mismatch between the map boundaries and the "unvierse" tiles
+- IPF based synthetic O/D is asymmetric (resident-side constraints) and therefore concentrates error in the workplace-side distribution (e.g. in Wanhua district)
 
 # Planned Updates
 

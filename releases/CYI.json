@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "versions": [
+    {
+      "version": "0.1.0",
+      "game_version": "<=1.3.0",
+      "date": "2026-05-24",
+      "changelog": "New in 0.1.0",
+      "download": "https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/CYI.zip",
+      "sha256": "c88fc50f4dc6b21a2b7ced157327a24cda6c3f9b24c84e35a749d24ddb0175be"
+    }
+  ]
+}

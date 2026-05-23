@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>subwaybuilder-tw-maps releases</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin: 24px; line-height: 1.4; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background: #f5f5f5; }
+    code { background: #f2f2f2; padding: 1px 4px; border-radius: 4px; }
+    section { margin-top: 28px; }
+    pre { background: #fafafa; border: 1px solid #ddd; padding: 12px; overflow-x: auto; white-space: pre-wrap; }
+    article.readme { border: 1px solid #e6e6e6; background: #fbfbfb; padding: 14px; border-radius: 6px; }
+    article.readme h1, article.readme h2, article.readme h3, article.readme h4 { margin-top: 1.1em; margin-bottom: 0.5em; }
+    article.readme ul { margin-top: 0.3em; }
+    article.readme img { max-width: 100%; height: auto; display: block; margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <h1>subwaybuilder-tw-maps</h1>
+  <p>A collection of Taiwanese city maps for the game Subway Builder.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Names</th>
+        <th>Manifest</th>
+        <th>Latest Version</th>
+        <th>Date</th>
+        <th>Latest Download</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>CYI</td><td>嘉義 (Chiayi)</td><td><a href="./CYI.json">CYI.json</a></td><td>0.1.0</td><td>2026-05-24</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/CYI.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/CYI.zip</a></td></tr><tr><td>HSZ</td><td>新竹 (Hsinchu)</td><td><a href="./HSZ.json">HSZ.json</a></td><td>0.1.0</td><td>2026-05-24</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/HSZ.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/HSZ.zip</a></td></tr><tr><td>KHH</td><td>高雄 (Kaohsiung)</td><td><a href="./KHH.json">KHH.json</a></td><td>0.1.0</td><td>2026-05-24</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/KHH.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/KHH.zip</a></td></tr><tr><td>RMQ</td><td>臺中 (Taichung)</td><td><a href="./RMQ.json">RMQ.json</a></td><td>0.1.0</td><td>2026-05-24</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/RMQ.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/RMQ.zip</a></td></tr><tr><td>TNN</td><td>臺南 (Tainan)</td><td><a href="./TNN.json">TNN.json</a></td><td>0.1.0</td><td>2026-05-24</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/TNN.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/TNN.zip</a></td></tr><tr><td>TPE</td><td>臺北 (Taipei)</td><td><a href="./TPE.json">TPE.json</a></td><td>0.1.0</td><td>2026-05-24</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/TPE.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/TPE.zip</a></td></tr>
+    </tbody>
+  </table>
+  <section>
+    <h2>README</h2>
+    <article class="readme">
+<h1>Summary</h1>
+<p>Each map covers the metropolitan area around one or more major Taiwanese cities. Metropolitan-area bounds are drawn from a curated Functional Urban Area (FUA) registry built on Ministry of Interior 村里界圖 (Village &amp; Borough Boundary) polygons; sub-municipal population, employment, and commute data drive resident and worker placement at the 里 (village/borough) grain.</p>
+<h2>Features</h2>
+<ul>
+  <li>High level of detail, with sub-村里 population placement driven by the DGBAS 最小統計區 (Minimum Statistical Area) census polygons — the official sub-里 census product carrying per-cell population direct from the household register — and refined within each cell by NLUI Level-2 residential floor area (pure 0502 + mixed-use 0503) summed from NLSC LoD1 building footprints.</li>
+  <li>Spatial realism — points are assigned in a manner that is aware of water features, mountain-indigenous reserve areas, and density-weighted placement surfaces.</li>
+  <li>Special demand from several sources is modeled where Taiwanese open data is available.</li>
+  <li style="margin-left: 1.25em;"><strong>Airports</strong></li>
+  <li style="margin-left: 2.50em;">Demand based on annualized passenger statistics from the 民用航空局 (Civil Aeronautics Administration / CAA), 2024 throughput across the 6 international and domestic terminals.</li>
+  <li style="margin-left: 1.25em;"><strong>Institutions of Learning</strong></li>
+  <li style="margin-left: 2.50em;">Students in post-secondary (大學 / 專科學校) sized from official daytime (日間) per-school enrollment data published by the 教育部 (Ministry of Education / MOE), filtered to the latest 學年度 (academic year). University locations are recovered via a layered OSM exact-name campus + Wikidata + manual-curation pipeline.</li>
+  <li>Buildings are sourced from NLSC LoD1 (內政部國土測繪中心 3D 精緻建物模型), with surveyed per-building height and floor count for the entire island.</li>
+  <li>OSRM routing is included, with a scaling time penalty based on commute distance and metropolitan area size.</li>
+  <li>Building depth defaults to −10 m, with train-related infrastructure exempt.</li>
+</ul>
+<h2>High-Level Methodology</h2>
+<p>Township-level resident and worker totals are taken directly from official census products — residence-side from the MOI 戶政司 monthly per-village register (ODRP014) and DGBAS 2020 census township-level employment-status counts (working-age population, employed persons by agriculture / industry / services sector), workplace-side from the 2021 工商業普查 (Industry &amp; Services Census) per-township persons-engaged. These township totals are conserved through the disaggregation to 里 (village/borough). Within each 里, residents are placed using the DGBAS 最小統計區 (Minimum Statistical Area, MSA) sub-里 census polygons — the official census product carrying a per-cell Dec-2024 P_CNT population field direct from the household register — then refined within each MSA cell by a 100 m residential floor-area signal built from NLSC LoD1 buildings under the NLUI Level-2 residential classification (0502 pure + 0503 mixed-use). Workers are placed using the NLUI Level-2 raster combined with NLSC LoD1 floor area per workplace land-use class, calibrated by a bounded-Tikhonov LSQ with per-county census sector constraints from the 2021 工商業普查 per-county persons-engaged by industry major (17 majors × 22 counties, consolidated into 8 sector groups inside the solve with a white-collar / blue-collar 職員/工員 split). Population counts are conserved at township control totals, while workplace-side calibration via a per-county Option A scaling reconciles the universe mismatch between the 2021 工商業普查 (9.61M workplace persons-engaged) and the 2020 census all-employed universe (11.56M, including agriculture and public-sector employment).</p>
+<p>A gravity model augmented with the DGBAS 2020 census commute O/D matrices (workplace × residence cross-tabs at per-county and per-township resolution) reproduces macro-level commute patterns. A cordon-snap pass injects the out-of-bundle commute mass from neighbouring counties as anchored sinks at county centroids; a Generalized Iterative Proportional Fit (GIPF) pass then pins each township&#x27;s self-loop share to the per-township census ground truth for same-township commutes.</p>
+<p>Agriculture employment is dropped at the township grain using the DGBAS census employment-status counts (agricultural-sector employed persons per township) to avoid placing rural-residence farmers in workplace buildings, since the 2020 census records work location by residence rather than workplace for the agricultural cohort.</p>
+<h2>Primary Data Sources</h2>
+<ul>
+  <li>DGBAS — 主計總處 — 2020 Population &amp; Housing Census (township-level employment-status counts, per-county industry counts, workplace × residence cross-tabs, work-commute O/D matrices), 最小統計區 (Minimum Statistical Area) sub-里 census polygons with per-cell population, and 2021 工商業普查 (Industry &amp; Services Census — workplace persons-engaged by township × industry and by county × industry-major) (stat.gov.tw)</li>
+  <li>MOI — 內政部 — 戶政司 monthly village population (ODRP014 / ris.gov.tw) and 村里界圖 administrative boundary polygons (data.moi.gov.tw)</li>
+  <li>NLSC — 內政部國土測繪中心 — 國土利用調查 (NLUI) Level-2 land-use raster served via public WMS (maps.nlsc.gov.tw), and the 3D 精緻建物模型 LoD1 building footprint + height + floor count product (3dmaps.nlsc.gov.tw)</li>
+  <li>MOE — 教育部 — 大專校院校別資料 (per-school × 日間/進修 × degree-level enrollment) and institutional registry (stats.moe.gov.tw)</li>
+  <li>CAA — 民用航空局 — terminal-level annual passenger statistics (caa.gov.tw)</li>
+</ul>
+<h2>Issues/Questions</h2>
+<p>Please raise an issue on this repository for incorrect manifests, broken download links, or release-page problems. Suggestions are welcome — especially pointers to Taiwanese open datasets that could improve existing bundles or unlock new categories (hospital / military / sport / cultural / attractions are scheduled for Phase E expansion).</p>
+<h1>Changelog</h1>
+<h2>0.1.0 (2026-05-23)</h2>
+<h3>Initial Cities</h3>
+<ul>
+  <li><code>TPE</code> - 臺北 / Taipei</li>
+  <li><code>RMQ</code> - 臺中 / Taichung</li>
+  <li><code>KHH</code> - 高雄 / Kaohsiung</li>
+  <li><code>TNN</code> - 臺南 / Tainan</li>
+  <li><code>HSZ</code> - 新竹 / Hsinchu</li>
+  <li><code>CYI</code> - 嘉義 / Chiayi</li>
+</ul>
+<h3>New Features</h3>
+<ul>
+  <li>First release of the Taiwan maps.</li>
+  <li>里-level (village/borough) resident and worker placement for all six bundles, calibrated against the DGBAS 2020 census and the 2021 工商業普查.</li>
+  <li>NLSC LoD1 is the canonical TW building source, providing surveyed per-building height and floor count for the entire island.</li>
+  <li>Phase E special demand for airports and post-secondary education institutions (universities + 專科學校) are included with a small haircut applied to enrollment counts so the modeled on-site demand matches more realistically the trips generated by the daytime (日間) cohort.</li>
+  <li>Cordon-snap injection of out-of-bundle commute mass plus a GIPF pass that pins each township&#x27;s self-loop share to the per-township DGBAS census ground truth for same-township commutes.</li>
+</ul>
+<h3>Known Issues</h3>
+<ul>
+  <li>The published commute O/D matrix is the 2020 DGBAS census, which post-dates a partial pandemic disruption. The per-township GIPF calibration anchors the self-loop share to the census ground truth, but the cross-township flow structure inherits whatever residual COVID-era bias remains in the source.</li>
+  <li>Individual post-secondary education institutions are placed at a single point matching the registered institutional address, which may not reflect the actual spatial distribution of students across multiple campuses or satellite facilities. Per-faculty placement is planned for a future update.</li>
+  <li>Inland-water bathymetry (rivers / lakes / reservoirs) is included via a flat −4 m depth index. <strong>Coastal bathymetry (Taiwan Strait + Pacific)</strong> is scheduled for a v2 release once an offshore depth source is registered.</li>
+  <li>Special demand currently covers only airports and post-secondary education. Hospitals (NHI register), military bases (MND garrison roster), tourism attractions (景點 / national scenic areas), sport venues, and cultural centers will be added as Phase E data lands.</li>
+</ul>
+<h1>Planned Updates</h1>
+<ul>
+  <li>Phase E expansion to cover hospitals, military bases, primary/secondary education, tourism attractions, sport venues, and cultural centers as Taiwanese open data is registered.</li>
+  <li>Coastal bathymetry (Taiwan Strait + Pacific) via EMODnet or GEBCO 2024.</li>
+  <li>Per-faculty placement for multi-campus universities (currently single-point at the registered institutional address).</li>
+  <li>Continued refinement of attraction coverage and point placement.</li>
+</ul>
+    </article>
+  </section>
+</body>
+</html>

@@ -37,7 +37,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 # Changelog
 
-## 0.1.0 (2026-05-23)
+## 0.1.0 (2026-05-24)
 
 ### Initial Cities
 

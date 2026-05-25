@@ -33,7 +33,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr><td>CYI</td><td>嘉義 (Chiayi)</td><td><a href="./CYI.json">CYI.json</a></td><td>0.1.0</td><td>2026-05-24</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/CYI.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/CYI.zip</a></td></tr><tr><td>HSZ</td><td>新竹 (Hsinchu)</td><td><a href="./HSZ.json">HSZ.json</a></td><td>0.1.0</td><td>2026-05-24</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/HSZ.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/HSZ.zip</a></td></tr><tr><td>KHH</td><td>高雄 (Kaohsiung)</td><td><a href="./KHH.json">KHH.json</a></td><td>0.1.0</td><td>2026-05-24</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/KHH.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/KHH.zip</a></td></tr><tr><td>RMQ</td><td>臺中 (Taichung)</td><td><a href="./RMQ.json">RMQ.json</a></td><td>0.1.0</td><td>2026-05-24</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/RMQ.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/RMQ.zip</a></td></tr><tr><td>TNN</td><td>臺南 (Tainan)</td><td><a href="./TNN.json">TNN.json</a></td><td>0.1.0</td><td>2026-05-24</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/TNN.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/TNN.zip</a></td></tr><tr><td>TPE</td><td>臺北 (Taipei)</td><td><a href="./TPE.json">TPE.json</a></td><td>0.1.0</td><td>2026-05-24</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/TPE.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/TPE.zip</a></td></tr>
+      <tr><td>CYI</td><td>嘉義 (Chiayi)</td><td><a href="./CYI.json">CYI.json</a></td><td>0.1.1</td><td>2026-05-25</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.1/CYI.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.1/CYI.zip</a></td></tr><tr><td>HSZ</td><td>新竹 (Hsinchu)</td><td><a href="./HSZ.json">HSZ.json</a></td><td>0.1.1</td><td>2026-05-25</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.1/HSZ.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.1/HSZ.zip</a></td></tr><tr><td>KHH</td><td>高雄 (Kaohsiung)</td><td><a href="./KHH.json">KHH.json</a></td><td>0.1.1</td><td>2026-05-25</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.1/KHH.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.1/KHH.zip</a></td></tr><tr><td>RMQ</td><td>臺中 (Taichung)</td><td><a href="./RMQ.json">RMQ.json</a></td><td>0.1.1</td><td>2026-05-25</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.1/RMQ.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.1/RMQ.zip</a></td></tr><tr><td>TNN</td><td>臺南 (Tainan)</td><td><a href="./TNN.json">TNN.json</a></td><td>0.1.1</td><td>2026-05-25</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.1/TNN.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.1/TNN.zip</a></td></tr><tr><td>TPE</td><td>臺北 (Taipei)</td><td><a href="./TPE.json">TPE.json</a></td><td>0.1.1</td><td>2026-05-25</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.1/TPE.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.1/TPE.zip</a></td></tr>
     </tbody>
   </table>
   <section>
@@ -68,8 +68,39 @@
 </ul>
 <h2>Issues/Questions</h2>
 <p>Please raise an issue on this repository for incorrect manifests, broken download links, or release-page problems. Suggestions are welcome — especially pointers to Taiwanese open datasets that could improve existing bundles or unlock new categories (hospital / military / sport / cultural / attractions are scheduled for Phase E expansion).</p>
+<h2>Known Issues</h2>
+<ul>
+  <li>The published commute O/D matrix is the 2020 DGBAS census, which post-dates a partial pandemic disruption. The per-township GIPF calibration anchors the self-loop share to the census ground truth, but the cross-township flow structure inherits whatever residual COVID-era bias remains in the source.</li>
+  <li>Individual post-secondary education institutions are placed at a single point matching the registered institutional address, which may not reflect the actual spatial distribution of students across multiple campuses or satellite facilities. Per-faculty placement is planned for a future update.</li>
+  <li>Inland-water bathymetry (rivers / lakes / reservoirs) is included via a flat −4 m depth index. <strong>Coastal bathymetry (Taiwan Strait + Pacific)</strong> is scheduled for a v2 release once an offshore depth source is registered.</li>
+  <li>Special demand currently covers only airports and post-secondary education. Hospitals (NHI register), military bases (MND garrison roster), tourism attractions (景點 / national scenic areas), sport venues, and cultural centers will be added as Phase E data lands.</li>
+  <li><del>Some coastal tiles on map edges do not render correctly due to a land mask polygon mismatch between the map boundaries and the &quot;unvierse&quot; tiles</del> <strong>(Resolved in 0.1.1)</strong></li>
+  <li><del>IPF based synthetic O/D is asymmetric (resident-side constraints) and therefore concentrates error in the workplace-side distribution (e.g. in Wanhua district)</del> <strong>(Resolved in 0.1.1)</strong></li>
+</ul>
 <h1>Changelog</h1>
-<h2>0.1.0 (2026-05-23)</h2>
+<h2>0.1.1 (2026-05-26)</h2>
+<h3>Updated Cities</h3>
+<ul>
+  <li><code>TPE</code> - 臺北 / Taipei</li>
+  <li><code>RMQ</code> - 臺中 / Taichung</li>
+  <li><code>KHH</code> - 高雄 / Kaohsiung</li>
+  <li><code>TNN</code> - 臺南 / Tainan</li>
+  <li><code>HSZ</code> - 新竹 / Hsinchu</li>
+  <li><code>CYI</code> - 嘉義 / Chiayi</li>
+</ul>
+<h3>Bugfixes</h3>
+<ul>
+  <li>Coastline rendering — fixed grid-like artifacts and rectangular intrusions at the map&#x27;s land/ocean boundary, most visible along the western edge of southwest Pingtung county.</li>
+  <li>Inland water and rivers — rivers that cross the bundle edge now extend past the map boundary instead of being sharply cut off; small redundant river polygons inside larger estuarine water bodies are no longer rendered as incongruous fragments at river mouths.</li>
+  <li>Map labels — city, town, and locality labels from outside the bundle no longer bleed through (e.g. Kaohsiung&#x27;s major label no longer appears in Tainan, Tainan&#x27;s no longer in Chiayi).</li>
+  <li>Inland depth-index — pockets of inland farmland are no longer mis-marked as ocean in the runtime depth lookup, eliminating spurious &quot;ocean over land&quot; cells.</li>
+</ul>
+<h3>New Features</h3>
+<ul>
+  <li>The synthetic origin/destination commute pass now keys the township-level constraint on the workplace side, removing the resident-side asymmetry that previously concentrated error in residential townships.</li>
+  <li><strong>Taipei (TPE)</strong> — designated-city scope now anchors on multiple city centres across the metropolitan area for improved label centering.</li>
+</ul>
+<h2>0.1.0 (2026-05-24)</h2>
 <h3>Initial Cities</h3>
 <ul>
   <li><code>TPE</code> - 臺北 / Taipei</li>
@@ -86,13 +117,6 @@
   <li>NLSC LoD1 is the canonical TW building source, providing surveyed per-building height and floor count for the entire island.</li>
   <li>Phase E special demand for airports and post-secondary education institutions (universities + 專科學校) are included with a small haircut applied to enrollment counts so the modeled on-site demand matches more realistically the trips generated by the daytime (日間) cohort.</li>
   <li>Cordon-snap injection of out-of-bundle commute mass plus a GIPF pass that pins each township&#x27;s self-loop share to the per-township DGBAS census ground truth for same-township commutes.</li>
-</ul>
-<h3>Known Issues</h3>
-<ul>
-  <li>The published commute O/D matrix is the 2020 DGBAS census, which post-dates a partial pandemic disruption. The per-township GIPF calibration anchors the self-loop share to the census ground truth, but the cross-township flow structure inherits whatever residual COVID-era bias remains in the source.</li>
-  <li>Individual post-secondary education institutions are placed at a single point matching the registered institutional address, which may not reflect the actual spatial distribution of students across multiple campuses or satellite facilities. Per-faculty placement is planned for a future update.</li>
-  <li>Inland-water bathymetry (rivers / lakes / reservoirs) is included via a flat −4 m depth index. <strong>Coastal bathymetry (Taiwan Strait + Pacific)</strong> is scheduled for a v2 release once an offshore depth source is registered.</li>
-  <li>Special demand currently covers only airports and post-secondary education. Hospitals (NHI register), military bases (MND garrison roster), tourism attractions (景點 / national scenic areas), sport venues, and cultural centers will be added as Phase E data lands.</li>
 </ul>
 <h1>Planned Updates</h1>
 <ul>

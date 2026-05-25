@@ -2,6 +2,14 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.1.1",
+      "game_version": "<=1.3.0",
+      "date": "2026-05-25",
+      "changelog": "Improved coastline accuracy and inland water/river representation, fixed neighbouring-city label bleed, and refined origin/destination commute distribution.",
+      "download": "https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.1/TNN.zip",
+      "sha256": "0135ef356fb2631dc561f2d66391ebdf65f2c3dbd660d199f58e2f54deb30724"
+    },
+    {
       "version": "0.1.0",
       "game_version": "<=1.3.0",
       "date": "2026-05-24",

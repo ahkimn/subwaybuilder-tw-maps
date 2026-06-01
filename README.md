@@ -50,7 +50,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 # Changelog
 
-## 0.2.0 (2026-06-DD)
+## 0.1.2 (2026-06-01)
 
 ### Updated Cities
 
@@ -63,7 +63,8 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 ### New Features
 
-- **Landuse coverage now sourced from NLSC NLUI.** Rendered forest, parks, orchards, cemeteries, and shrubland now come from the NLSC 國土利用現況調查 (National Land Use Inventory) public WMS Level-2 layers at ~10 m resolution rather than from OpenStreetMap. Mountain forest in the Central Range and orchard coverage across central and southern Taiwan are substantially more comprehensive than the prior OSM layer; the same authoritative source already drives the workplace dasymetric.
+- **Broader rendered landuse coverage.** Greenery rendering now resolves a wider palette of OSM landuse kinds.
+  - The NLUI raster layer is still used for the workplace dasymetric upstream.
 
 - **Coastal landuse no longer covers the ocean.** The rendered landuse layer is now clipped to the authoritative MOI 村里界圖 land polygon, so coastal parks, forest, and other land features no longer extend offshore past the rendered ocean boundary.
 
@@ -91,6 +92,10 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - **Residential coverage for newly created villages.** Recent post-2020 administrative splits and 里 created as a result were previously receiving zero residents because the MOI 村里界圖 boundary shapefile used at build time post-dates the village-level population CSV.
   - The build now uses dual-vintage MOI 戶政司 population data — the 2020 DGBAS census anchor combined with the latest matched monthly release — and rescales the newer distribution against the census anchor at the township grain.
   - Residents are restored to all affected villages while township totals remain pinned to the official census anchor.
+
+- **Spurious NLSC building artifacts removed.** A small fraction of the NLSC LoD1 3D building model carried photogrammetric artifacts that surfaced as visible bugs in earlier renders. Two classes are now filtered:
+  - _Ribbon footprints_ — long thin polygons (likely at the seams of a scan) that are improbably long are now excluded.
+  - _Corrupted floor counts_ — individual records carrying impossibly high `floors` values (catastrophic example: 9,935 floors encoding as a 32 km tall building, plus a handful of rural-district records claiming 50-170 floors). The building footprint is preserved; only the `height` and `floors` fields are normalized.
 
 ## 0.1.1 (2026-05-26)
 

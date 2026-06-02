@@ -42,13 +42,37 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 - The published commute O/D matrix is the 2020 DGBAS census, which post-dates a partial pandemic disruption. The per-township GIPF calibration anchors the self-loop share to the census ground truth, but the cross-township flow structure inherits whatever residual COVID-era bias remains in the source.
 - Individual post-secondary education institutions are placed at a single point matching the registered institutional address, which may not reflect the actual spatial distribution of students across multiple campuses or satellite facilities. **(Partially resolved in 0.2.0** — 16 cross-county multi-campus institutions are now split across campuses by MOE 表A2-8 enrollment shares; per-faculty placement within a single campus is still planned for a future update.**)**
-- Inland-water bathymetry (rivers / lakes / reservoirs) is included via a flat −4 m depth index. **Coastal bathymetry (Taiwan Strait + Pacific)** is scheduled for a v2 release once an offshore depth source is registered.
 - Special demand currently covers airports, post-secondary education, tourism attractions, hospitals, ports, convention / exhibition centers, stadiums and arenas, and cultural centers. Military bases (MND garrison roster) and primary / secondary education will be added as Phase E data lands.
 - Tourism attraction visitor counts auto-skip area-level methodologies (電信數據 / 廟方估計 / 停車數概估 / 自動車流監視) per the 9-method counting spec. Methodology is only directly verifiable for ~30 Tainan facilities via the per-county feed; other counties rely on a name-pattern heuristic validated against the Tainan distribution. False positives (legitimately ticketed entries the heuristic flagged as district pass-through) can be re-added via the operator-curated override CSV.
 - ~~Some coastal tiles on map edges do not render correctly due to a land mask polygon mismatch between the map boundaries and the "unvierse" tiles~~ **(Resolved in 0.1.1)**
 - ~~IPF based synthetic O/D is asymmetric (resident-side constraints) and therefore concentrates error in the workplace-side distribution (e.g. in Wanhua district)~~ **(Resolved in 0.1.1)**
 
 # Changelog
+
+## 0.1.3 (2026-06-03)
+
+### Updated Cities
+
+- `TPE` - 臺北 / Taipei
+- `RMQ` - 臺中 / Taichung
+- `KHH` - 高雄 / Kaohsiung
+- `TNN` - 臺南 / Tainan
+- `HSZ` - 新竹 / Hsinchu
+- `CYI` - 嘉義 / Chiayi
+
+### New Features
+
+- **Track-collision now applies to small inland water.** Previously the inland-water depth index sampled at ~300 m grid spacing and missed small streams, ponds, and irrigation lakes.
+
+- **Traditional municipal flags.** Taipei (臺北), Taichung (臺中), and Tainan (臺南) now display their traditional municipal flag designs.
+
+### Bugfixes
+
+- **Subterranean canals no longer rendered as surface water and no longer block track.** Hydropower diversion tunnels, anti-silt drains, and culverted irrigation channels were previously drawn as visible water polygons within the simulation -- these features are now filtered out of the water layer.
+
+- **Administrative-boundary parks no longer paint green over settled villages.** OSM admin-boundary polygons of type (`nature_reserve`, `national_park`, `protected_area`, `allotments`) used to render as continuous green areas covering the residential areas inside their administrative footprints.
+
+- **Coastline alignment between landuse and water.** Landuse and water now share the exact same simplified vertex positions at every zoom level, eliminating thin sub-pixel overlap ribbons.
 
 ## 0.1.2 (2026-06-01)
 
@@ -141,7 +165,4 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 # Planned Updates
 
-- Phase E expansion to cover hospitals, military bases, primary/secondary education, tourism attractions, sport venues, and cultural centers as Taiwanese open data is registered.
-- Coastal bathymetry (Taiwan Strait + Pacific) via EMODnet or GEBCO 2024.
-- Per-faculty placement for multi-campus universities (currently single-point at the registered institutional address).
-- Continued refinement of attraction coverage and point placement.
+- **Coastal bathymetry (Taiwan Strait + Pacific)** is scheduled for a v2 release — GEBCO global GeoTIFF support has been wired but the file is not yet shipped, so coastal cells still default to flat −4 m.

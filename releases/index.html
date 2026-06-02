@@ -33,7 +33,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr><td>CYI</td><td>嘉義 (Chiayi)</td><td><a href="./CYI.json">CYI.json</a></td><td>0.2.0</td><td>2026-06-01</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.2/CYI.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.2/CYI.zip</a></td></tr><tr><td>HSZ</td><td>新竹 (Hsinchu)</td><td><a href="./HSZ.json">HSZ.json</a></td><td>0.2.0</td><td>2026-06-01</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.2/HSZ.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.2/HSZ.zip</a></td></tr><tr><td>KHH</td><td>高雄 (Kaohsiung)</td><td><a href="./KHH.json">KHH.json</a></td><td>0.2.0</td><td>2026-06-01</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.2/KHH.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.2/KHH.zip</a></td></tr><tr><td>RMQ</td><td>臺中 (Taichung)</td><td><a href="./RMQ.json">RMQ.json</a></td><td>0.2.0</td><td>2026-06-01</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.2/RMQ.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.2/RMQ.zip</a></td></tr><tr><td>TNN</td><td>臺南 (Tainan)</td><td><a href="./TNN.json">TNN.json</a></td><td>0.2.0</td><td>2026-06-01</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.2/TNN.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.2/TNN.zip</a></td></tr><tr><td>TPE</td><td>臺北 (Taipei)</td><td><a href="./TPE.json">TPE.json</a></td><td>0.2.0</td><td>2026-06-01</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.2/TPE.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.2/TPE.zip</a></td></tr>
+      <tr><td>CYI</td><td>嘉義 (Chiayi)</td><td><a href="./CYI.json">CYI.json</a></td><td>0.2.1</td><td>2026-06-03</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.3/CYI.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.3/CYI.zip</a></td></tr><tr><td>HSZ</td><td>新竹 (Hsinchu)</td><td><a href="./HSZ.json">HSZ.json</a></td><td>0.2.1</td><td>2026-06-03</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.3/HSZ.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.3/HSZ.zip</a></td></tr><tr><td>KHH</td><td>高雄 (Kaohsiung)</td><td><a href="./KHH.json">KHH.json</a></td><td>0.2.1</td><td>2026-06-03</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.3/KHH.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.3/KHH.zip</a></td></tr><tr><td>RMQ</td><td>臺中 (Taichung)</td><td><a href="./RMQ.json">RMQ.json</a></td><td>0.2.1</td><td>2026-06-03</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.3/RMQ.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.3/RMQ.zip</a></td></tr><tr><td>TNN</td><td>臺南 (Tainan)</td><td><a href="./TNN.json">TNN.json</a></td><td>0.2.1</td><td>2026-06-03</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.3/TNN.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.3/TNN.zip</a></td></tr><tr><td>TPE</td><td>臺北 (Taipei)</td><td><a href="./TPE.json">TPE.json</a></td><td>0.2.1</td><td>2026-06-03</td><td><a href="https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.3/TPE.zip">https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.3/TPE.zip</a></td></tr>
     </tbody>
   </table>
   <section>
@@ -75,13 +75,39 @@
 <ul>
   <li>The published commute O/D matrix is the 2020 DGBAS census, which post-dates a partial pandemic disruption. The per-township GIPF calibration anchors the self-loop share to the census ground truth, but the cross-township flow structure inherits whatever residual COVID-era bias remains in the source.</li>
   <li>Individual post-secondary education institutions are placed at a single point matching the registered institutional address, which may not reflect the actual spatial distribution of students across multiple campuses or satellite facilities. <strong>(Partially resolved in 0.2.0</strong> — 16 cross-county multi-campus institutions are now split across campuses by MOE 表A2-8 enrollment shares; per-faculty placement within a single campus is still planned for a future update.<strong>)</strong></li>
-  <li>Inland-water bathymetry (rivers / lakes / reservoirs) is included via a flat −4 m depth index. <strong>Coastal bathymetry (Taiwan Strait + Pacific)</strong> is scheduled for a v2 release once an offshore depth source is registered.</li>
   <li>Special demand currently covers airports, post-secondary education, tourism attractions, hospitals, ports, convention / exhibition centers, stadiums and arenas, and cultural centers. Military bases (MND garrison roster) and primary / secondary education will be added as Phase E data lands.</li>
   <li>Tourism attraction visitor counts auto-skip area-level methodologies (電信數據 / 廟方估計 / 停車數概估 / 自動車流監視) per the 9-method counting spec. Methodology is only directly verifiable for ~30 Tainan facilities via the per-county feed; other counties rely on a name-pattern heuristic validated against the Tainan distribution. False positives (legitimately ticketed entries the heuristic flagged as district pass-through) can be re-added via the operator-curated override CSV.</li>
   <li><del>Some coastal tiles on map edges do not render correctly due to a land mask polygon mismatch between the map boundaries and the &quot;unvierse&quot; tiles</del> <strong>(Resolved in 0.1.1)</strong></li>
   <li><del>IPF based synthetic O/D is asymmetric (resident-side constraints) and therefore concentrates error in the workplace-side distribution (e.g. in Wanhua district)</del> <strong>(Resolved in 0.1.1)</strong></li>
 </ul>
 <h1>Changelog</h1>
+<h2>0.1.3 (2026-06-03)</h2>
+<h3>Updated Cities</h3>
+<ul>
+  <li><code>TPE</code> - 臺北 / Taipei</li>
+  <li><code>RMQ</code> - 臺中 / Taichung</li>
+  <li><code>KHH</code> - 高雄 / Kaohsiung</li>
+  <li><code>TNN</code> - 臺南 / Tainan</li>
+  <li><code>HSZ</code> - 新竹 / Hsinchu</li>
+  <li><code>CYI</code> - 嘉義 / Chiayi</li>
+</ul>
+<h3>New Features</h3>
+<ul>
+  <li><strong>Track-collision now applies to small inland water.</strong> Previously the inland-water depth index sampled at ~300 m grid spacing and missed small streams, ponds, and irrigation lakes.</li>
+</ul>
+<ul>
+  <li><strong>Traditional municipal flags.</strong> Taipei (臺北), Taichung (臺中), and Tainan (臺南) now display their traditional municipal flag designs.</li>
+</ul>
+<h3>Bugfixes</h3>
+<ul>
+  <li><strong>Subterranean canals no longer rendered as surface water and no longer block track.</strong> Hydropower diversion tunnels, anti-silt drains, and culverted irrigation channels were previously drawn as visible water polygons within the simulation -- these features are now filtered out of the water layer.</li>
+</ul>
+<ul>
+  <li><strong>Administrative-boundary parks no longer paint green over settled villages.</strong> OSM admin-boundary polygons of type (<code>nature_reserve</code>, <code>national_park</code>, <code>protected_area</code>, <code>allotments</code>) used to render as continuous green areas covering the residential areas inside their administrative footprints.</li>
+</ul>
+<ul>
+  <li><strong>Coastline alignment between landuse and water.</strong> Landuse and water now share the exact same simplified vertex positions at every zoom level, eliminating thin sub-pixel overlap ribbons.</li>
+</ul>
 <h2>0.1.2 (2026-06-01)</h2>
 <h3>Updated Cities</h3>
 <ul>
@@ -180,10 +206,7 @@
 </ul>
 <h1>Planned Updates</h1>
 <ul>
-  <li>Phase E expansion to cover hospitals, military bases, primary/secondary education, tourism attractions, sport venues, and cultural centers as Taiwanese open data is registered.</li>
-  <li>Coastal bathymetry (Taiwan Strait + Pacific) via EMODnet or GEBCO 2024.</li>
-  <li>Per-faculty placement for multi-campus universities (currently single-point at the registered institutional address).</li>
-  <li>Continued refinement of attraction coverage and point placement.</li>
+  <li><strong>Coastal bathymetry (Taiwan Strait + Pacific)</strong> is scheduled for a v2 release — GEBCO global GeoTIFF support has been wired but the file is not yet shipped, so coastal cells still default to flat −4 m.</li>
 </ul>
     </article>
   </section>

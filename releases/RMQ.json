@@ -2,6 +2,14 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.2.1",
+      "game_version": "<= 1.3.0",
+      "date": "2026-06-03",
+      "changelog": "Rendered landuse now resolves a wider OSM greenery palette (forest, wood, grass, meadow, cemetery, orchard, nature reserve, etc.) into the in-game park umbrella, so far more parkland, forest, and natural cover renders than in 0.1.x. Added hospital, port, convention / exhibition center, stadium and arena, and cultural-center demand. Multi-campus universities are now split across their campuses, attraction coverage expanded, and resident coverage restored for newly created villages. **0.2.1**: track-collision now applies to small streams, ponds, and irrigation lakes (previously only large rivers / reservoirs registered). Cleaner mountain rendering — subterranean canals (anti-silt tunnels, power-plant diversions, culverted irrigation) are no longer drawn on the surface, and admin-boundary nature reserves / national parks no longer paint green over the settled villages inside them. Landuse and water now align at every zoom level so coastlines no longer show thin overlap artifacts. The municipal flag has been updated to the traditional design.",
+      "download": "https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.3/RMQ.zip",
+      "sha256": "aca615fca1462c8557bda761cdc6210e5811fdfa44b7b615fdd13bf20722cb9d"
+    },
+    {
       "version": "0.2.0",
       "game_version": "<= 1.3.0",
       "date": "2026-06-01",

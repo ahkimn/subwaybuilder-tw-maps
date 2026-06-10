@@ -1,4 +1,6 @@
-# Summary
+# subwaybuilder-tw-maps
+
+## Summary
 
 Each map covers the metropolitan area around one or more major Taiwanese cities. Metropolitan-area bounds are drawn from a curated Functional Urban Area (FUA) registry built on Ministry of Interior 村里界圖 (Village & Borough Boundary) polygons; sub-municipal population, employment, and commute data drive resident and worker placement at the 里 (village/borough) grain.
 
@@ -36,22 +38,22 @@ Agriculture employment is dropped at the township grain using the DGBAS census e
 
 ## Issues/Questions
 
-Please raise an issue on this repository for incorrect manifests, broken download links, or release-page problems. Suggestions are welcome — especially pointers to Taiwanese open datasets that could improve existing bundles or unlock new categories (military bases and primary/secondary education are still scheduled for Phase E expansion).
+Please raise an issue on this repository for incorrect manifests, broken download links, or release-page problems. Suggestions are welcome — especially pointers to Taiwanese open datasets that could improve existing bundles or unlock new categories (military bases and primary/secondary education are still scheduled for a future release).
 
 ## Known Issues
 
 - The published commute O/D matrix is the 2020 DGBAS census, which post-dates a partial pandemic disruption. The per-township GIPF calibration anchors the self-loop share to the census ground truth, but the cross-township flow structure inherits whatever residual COVID-era bias remains in the source.
 - Individual post-secondary education institutions are placed at a single point matching the registered institutional address, which may not reflect the actual spatial distribution of students across multiple campuses or satellite facilities. **(Partially resolved in 0.2.0** — 16 cross-county multi-campus institutions are now split across campuses by MOE 表A2-8 enrollment shares; per-faculty placement within a single campus is still planned for a future update.**)**
-- Special demand currently covers airports, post-secondary education, tourism attractions, hospitals, ports, convention / exhibition centers, stadiums and arenas, and cultural centers. Military bases (MND garrison roster) and primary / secondary education will be added as Phase E data lands.
+- Special demand currently covers airports, post-secondary education, tourism attractions, hospitals, ports, convention / exhibition centers, stadiums and arenas, and cultural centers. Military bases (MND garrison roster) and primary / secondary education will be added as data sources are curated.
 - Tourism attraction visitor counts auto-skip area-level methodologies (電信數據 / 廟方估計 / 停車數概估 / 自動車流監視) per the 9-method counting spec. Methodology is only directly verifiable for ~30 Tainan facilities via the per-county feed; other counties rely on a name-pattern heuristic validated against the Tainan distribution. False positives (legitimately ticketed entries the heuristic flagged as district pass-through) can be re-added via the operator-curated override CSV.
 - ~~Some coastal tiles on map edges do not render correctly due to a land mask polygon mismatch between the map boundaries and the "unvierse" tiles~~ **(Resolved in 0.1.1)**
 - ~~IPF based synthetic O/D is asymmetric (resident-side constraints) and therefore concentrates error in the workplace-side distribution (e.g. in Wanhua district)~~ **(Resolved in 0.1.1)**
 
-# Changelog
+## Changelog
 
-## 0.1.3 (2026-06-03)
+### 0.1.3 (2026-06-03)
 
-### Updated Cities
+#### Updated Cities
 
 - `TPE` - 臺北 / Taipei
 - `RMQ` - 臺中 / Taichung
@@ -60,13 +62,13 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - `HSZ` - 新竹 / Hsinchu
 - `CYI` - 嘉義 / Chiayi
 
-### New Features
+#### New Features
 
 - **Track-collision now applies to small inland water.** Previously the inland-water depth index sampled at ~300 m grid spacing and missed small streams, ponds, and irrigation lakes.
 
 - **Traditional municipal flags.** Taipei (臺北), Taichung (臺中), and Tainan (臺南) now display their traditional municipal flag designs.
 
-### Bugfixes
+#### Bugfixes
 
 - **Subterranean canals no longer rendered as surface water and no longer block track.** Hydropower diversion tunnels, anti-silt drains, and culverted irrigation channels were previously drawn as visible water polygons within the simulation -- these features are now filtered out of the water layer.
 
@@ -74,9 +76,9 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 - **Coastline alignment between landuse and water.** Landuse and water now share the exact same simplified vertex positions at every zoom level, eliminating thin sub-pixel overlap ribbons.
 
-## 0.1.2 (2026-06-01)
+### 0.1.2 (2026-06-01)
 
-### Updated Cities
+#### Updated Cities
 
 - `TPE` - 臺北 / Taipei
 - `RMQ` - 臺中 / Taichung
@@ -85,7 +87,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - `HSZ` - 新竹 / Hsinchu
 - `CYI` - 嘉義 / Chiayi
 
-### New Features
+#### New Features
 
 - **Broader rendered landuse coverage.** Greenery rendering now resolves a wider palette of OSM landuse kinds.
   - The NLUI raster layer is still used for the workplace dasymetric upstream.
@@ -111,7 +113,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 - **Building-classification refinements.** Malformed source building footprints that aggregated multiple separate facilities into a single oversized polygon have been excluded from both workplace calibration and the final exported tiles.
 
-### Bugfixes
+#### Bugfixes
 
 - **Residential coverage for newly created villages.** Recent post-2020 administrative splits and 里 created as a result were previously receiving zero residents because the MOI 村里界圖 boundary shapefile used at build time post-dates the village-level population CSV.
   - The build now uses dual-vintage MOI 戶政司 population data — the 2020 DGBAS census anchor combined with the latest matched monthly release — and rescales the newer distribution against the census anchor at the township grain.
@@ -121,9 +123,9 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
   - _Ribbon footprints_ — long thin polygons (likely at the seams of a scan) that are improbably long are now excluded.
   - _Corrupted floor counts_ — individual records carrying impossibly high `floors` values (catastrophic example: 9,935 floors encoding as a 32 km tall building, plus a handful of rural-district records claiming 50-170 floors). The building footprint is preserved; only the `height` and `floors` fields are normalized.
 
-## 0.1.1 (2026-05-26)
+### 0.1.1 (2026-05-26)
 
-### Updated Cities
+#### Updated Cities
 
 - `TPE` - 臺北 / Taipei
 - `RMQ` - 臺中 / Taichung
@@ -132,21 +134,21 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - `HSZ` - 新竹 / Hsinchu
 - `CYI` - 嘉義 / Chiayi
 
-### Bugfixes
+#### Bugfixes
 
 - Coastline rendering — fixed grid-like artifacts and rectangular intrusions at the map's land/ocean boundary, most visible along the western edge of southwest Pingtung county.
 - Inland water and rivers — rivers that cross the bundle edge now extend past the map boundary instead of being sharply cut off; small redundant river polygons inside larger estuarine water bodies are no longer rendered as incongruous fragments at river mouths.
 - Map labels — city, town, and locality labels from outside the bundle no longer bleed through (e.g. Kaohsiung's major label no longer appears in Tainan, Tainan's no longer in Chiayi).
 - Inland depth-index — pockets of inland farmland are no longer mis-marked as ocean in the runtime depth lookup, eliminating spurious "ocean over land" cells.
 
-### New Features
+#### New Features
 
 - The synthetic origin/destination commute pass now keys the township-level constraint on the workplace side, removing the resident-side asymmetry that previously concentrated error in residential townships.
 - **Taipei (TPE)** — designated-city scope now anchors on multiple city centres across the metropolitan area for improved label centering.
 
-## 0.1.0 (2026-05-24)
+### 0.1.0 (2026-05-24)
 
-### Initial Cities
+#### Initial Cities
 
 - `TPE` - 臺北 / Taipei
 - `RMQ` - 臺中 / Taichung
@@ -155,7 +157,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - `HSZ` - 新竹 / Hsinchu
 - `CYI` - 嘉義 / Chiayi
 
-### New Features
+#### New Features
 
 - First release of the Taiwan maps.
 - 里-level (village/borough) resident and worker placement for all six bundles, calibrated against the DGBAS 2020 census and the 2021 工商業普查.
@@ -163,6 +165,14 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - Phase E special demand for airports and post-secondary education institutions (universities + 專科學校) are included with a small haircut applied to enrollment counts so the modeled on-site demand matches more realistically the trips generated by the daytime (日間) cohort.
 - Cordon-snap injection of out-of-bundle commute mass plus a GIPF pass that pins each township's self-loop share to the per-township DGBAS census ground truth for same-township commutes.
 
-# Planned Updates
+## Planned Updates
 
 - **Coastal bathymetry (Taiwan Strait + Pacific)** is scheduled for a v2 release — GEBCO global GeoTIFF support has been wired but the file is not yet shipped, so coastal cells still default to flat −4 m.
+
+## License
+
+All maps are released under the [GNU General Public License v3.0](https://github.com/ahkimn/subwaybuilder-tw-maps/blob/main/LICENSE).
+
+## Credits
+
+All maps authored by [Yukina-](https://subwaybuildermodded.com/credits/)

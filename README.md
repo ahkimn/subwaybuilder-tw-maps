@@ -55,12 +55,12 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 #### Updated Cities
 
-- `TPE` - 臺北 / Taipei
-- `RMQ` - 臺中 / Taichung
-- `KHH` - 高雄 / Kaohsiung
-- `TNN` - 臺南 / Tainan
-- `HSZ` - 新竹 / Hsinchu
-- `CYI` - 嘉義 / Chiayi
+- `TPE` - 臺北 (Taipei)
+- `RMQ` - 臺中 (Taichung)
+- `KHH` - 高雄 (Kaohsiung)
+- `TNN` - 臺南 (Tainan)
+- `HSZ` - 新竹 (Hsinchu)
+- `CYI` - 嘉義 (Chiayi)
 
 #### New Features
 
@@ -80,12 +80,12 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 #### Updated Cities
 
-- `TPE` - 臺北 / Taipei
-- `RMQ` - 臺中 / Taichung
-- `KHH` - 高雄 / Kaohsiung
-- `TNN` - 臺南 / Tainan
-- `HSZ` - 新竹 / Hsinchu
-- `CYI` - 嘉義 / Chiayi
+- `TPE` - 臺北 (Taipei)
+- `RMQ` - 臺中 (Taichung)
+- `KHH` - 高雄 (Kaohsiung)
+- `TNN` - 臺南 (Tainan)
+- `HSZ` - 新竹 (Hsinchu)
+- `CYI` - 嘉義 (Chiayi)
 
 #### New Features
 
@@ -127,12 +127,12 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 #### Updated Cities
 
-- `TPE` - 臺北 / Taipei
-- `RMQ` - 臺中 / Taichung
-- `KHH` - 高雄 / Kaohsiung
-- `TNN` - 臺南 / Tainan
-- `HSZ` - 新竹 / Hsinchu
-- `CYI` - 嘉義 / Chiayi
+- `TPE` - 臺北 (Taipei)
+- `RMQ` - 臺中 (Taichung)
+- `KHH` - 高雄 (Kaohsiung)
+- `TNN` - 臺南 (Tainan)
+- `HSZ` - 新竹 (Hsinchu)
+- `CYI` - 嘉義 (Chiayi)
 
 #### Bugfixes
 
@@ -150,12 +150,12 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 #### Initial Cities
 
-- `TPE` - 臺北 / Taipei
-- `RMQ` - 臺中 / Taichung
-- `KHH` - 高雄 / Kaohsiung
-- `TNN` - 臺南 / Tainan
-- `HSZ` - 新竹 / Hsinchu
-- `CYI` - 嘉義 / Chiayi
+- `TPE` - 臺北 (Taipei)
+- `RMQ` - 臺中 (Taichung)
+- `KHH` - 高雄 (Kaohsiung)
+- `TNN` - 臺南 (Tainan)
+- `HSZ` - 新竹 (Hsinchu)
+- `CYI` - 嘉義 (Chiayi)
 
 #### New Features
 

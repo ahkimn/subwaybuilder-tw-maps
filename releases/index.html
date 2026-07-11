@@ -39,175 +39,167 @@
   <section>
     <h2>README</h2>
     <article class="readme">
-<h1>Summary</h1>
-<p>Each map covers the metropolitan area around one or more major Taiwanese cities. Metropolitan-area bounds are drawn from a curated Functional Urban Area (FUA) registry built on Ministry of Interior 村里界圖 (Village &amp; Borough Boundary) polygons; sub-municipal population, employment, and commute data drive resident and worker placement at the 里 (village/borough) grain.</p>
+<h1>subwaybuilder-tw-maps</h1>
+<h2>Summary</h2>
+<p>Each map covers the metropolitan area around one or more major Taiwanese cities. Metropolitan-area bounds are drawn from a curated Functional Urban Area (FUA) registry built on Ministry of Interior 村里界圖 (Village &amp; Borough Boundary) polygons; sub-municipal population, employment, and commute data drive resident and worker placement at the 里 (village / borough) grain.</p>
 <h2>Features</h2>
 <ul>
   <li>High level of detail, with sub-村里 population placement driven by the DGBAS 最小統計區 (Minimum Statistical Area) census polygons — the official sub-里 census product carrying per-cell population direct from the household register — and refined within each cell by NLUI Level-2 residential floor area (pure 0502 + mixed-use 0503) summed from NLSC LoD1 building footprints.</li>
   <li>Spatial realism — points are assigned in a manner that is aware of water features, mountain-indigenous reserve areas, and density-weighted placement surfaces.</li>
-  <li>Special demand from several sources is modeled where Taiwanese open data is available.</li>
-  <li style="margin-left: 1.25em;"><strong>Airports</strong></li>
-  <li style="margin-left: 2.50em;">Demand based on annualized passenger statistics from the 民用航空局 (Civil Aeronautics Administration / CAA), 2024 throughput across the 6 international and domestic terminals.</li>
-  <li style="margin-left: 1.25em;"><strong>Institutions of Learning</strong></li>
-  <li style="margin-left: 2.50em;">Students in post-secondary (大學 / 專科學校) sized from official daytime (日間) per-school enrollment data published by the 教育部 (Ministry of Education / MOE), filtered to the latest 學年度 (academic year). University locations are recovered via a layered OSM exact-name campus + Wikidata + manual-curation pipeline.</li>
-  <li style="margin-left: 1.25em;"><strong>Tourism Attractions</strong></li>
-  <li style="margin-left: 2.50em;">Annual visitor counts at major 觀光遊憩據點 (scenic &amp; recreation sites) from the 交通部觀光署 (Tourism Administration) national rollup (data.gov.tw/dataset/8116), filtered to facility-anchored counting methods (門票數 / 人工計數器 / 柵欄式計數設備 / AI 精密人流偵測 / 電子計數器). Per the <a href="https://stat.taiwan.net.tw/">Tourism Administration 主要觀光遊憩據點統計作業要點</a> methodology spec, the 9 approved counting methods include both facility-level (門票數, 人工計數器, gate, AI, electronic) and area-level (電信數據 telco, 廟方估計 temple self-report, 停車數概估 parking-based estimation, 自動車流監視 traffic monitoring). Area-level entries are auto-skipped to avoid double-counting district pass-through traffic already captured by residential gravity. Methodology cross-check uses the <a href="https://data.tainan.gov.tw/">data.tainan.gov.tw 觀光遊憩月報</a> per-county feed which preserves the 備註 (methodology notes) column dropped from the national rollup. Coordinates resolved via the Tourism Administration Attraction Registry V2.1 (data.gov.tw/dataset/7777).</li>
+  <li>Special demand from several sources is modeled where Taiwanese open data is available — covering airports, universities and colleges, tourism attractions, hospitals, ports, convention centers, sports venues, and cultural centers. See <a href="#special-demand-details">Special Demand Details</a> below for the per-category breakdown.</li>
   <li>Buildings are sourced from NLSC LoD1 (內政部國土測繪中心 3D 精緻建物模型), with surveyed per-building height and floor count for the entire island.</li>
-  <li>OSRM routing is included, with a scaling time penalty based on commute distance and metropolitan area size.</li>
-  <li>Building depth defaults to −10 m, with train-related infrastructure exempt.</li>
+  <li>OSRM routing is included, with a scaling time penalty based on commute distance and metropolitan-area size.</li>
+  <li>Building foundation depth defaults to −10 m, with train-related infrastructure exempt.</li>
 </ul>
 <h2>High-Level Methodology</h2>
-<p>Township-level resident and worker totals are taken directly from official census products — residence-side from the MOI 戶政司 monthly per-village register (ODRP014) and DGBAS 2020 census township-level employment-status counts (working-age population, employed persons by agriculture / industry / services sector), workplace-side from the 2021 工商業普查 (Industry &amp; Services Census) per-township persons-engaged. These township totals are conserved through the disaggregation to 里 (village/borough). Within each 里, residents are placed using the DGBAS 最小統計區 (Minimum Statistical Area, MSA) sub-里 census polygons — the official census product carrying a per-cell Dec-2024 P_CNT population field direct from the household register — then refined within each MSA cell by a 100 m residential floor-area signal built from NLSC LoD1 buildings under the NLUI Level-2 residential classification (0502 pure + 0503 mixed-use). Workers are placed using the NLUI Level-2 raster combined with NLSC LoD1 floor area per workplace land-use class, calibrated by a bounded-Tikhonov LSQ with per-county census sector constraints from the 2021 工商業普查 per-county persons-engaged by industry major (17 majors × 22 counties, consolidated into 8 sector groups inside the solve with a white-collar / blue-collar 職員/工員 split). Population counts are conserved at township control totals, while workplace-side calibration via a per-county Option A scaling reconciles the universe mismatch between the 2021 工商業普查 (9.61M workplace persons-engaged) and the 2020 census all-employed universe (11.56M, including agriculture and public-sector employment).</p>
-<p>A gravity model augmented with the DGBAS 2020 census commute O/D matrices (workplace × residence cross-tabs at per-county and per-township resolution) reproduces macro-level commute patterns. A cordon-snap pass injects the out-of-bundle commute mass from neighbouring counties as anchored sinks at county centroids; a Generalized Iterative Proportional Fit (GIPF) pass then pins each township&#x27;s self-loop share to the per-township census ground truth for same-township commutes.</p>
+<p>Township-level resident and worker totals are taken directly from official census products — residence-side from the MOI 戶政司 monthly per-village register (ODRP014) and DGBAS 2020 census township-level employment-status counts (working-age population, employed persons by agriculture / industry / services sector), workplace-side from the 2021 工商業普查 (Industry &amp; Services Census) per-township persons-engaged. These township totals are conserved through the disaggregation to 里 (village / borough). Within each 里, residents are placed using the DGBAS 最小統計區 (Minimum Statistical Area, MSA) sub-里 census polygons — the official census product carrying a per-cell Dec-2024 population field direct from the household register — then refined within each MSA cell by a 100 m residential floor-area signal built from NLSC LoD1 buildings under the NLUI Level-2 residential classification (0502 pure + 0503 mixed-use). Workers are placed using the NLUI Level-2 raster combined with NLSC LoD1 floor area per workplace land-use class, calibrated by a bounded least-squares fit with per-county census sector constraints from the 2021 工商業普查 per-county persons-engaged by industry major (consolidated into sector groups with a white-collar / blue-collar 職員 / 工員 split). Population counts are conserved at township control totals, while a per-county workplace-side scaling reconciles the universe mismatch between the 2021 工商業普查 workplace persons-engaged and the 2020 census all-employed universe (which includes agriculture and public-sector employment).</p>
+<p>A gravity model augmented with the DGBAS 2020 census commute origin/destination matrices (workplace × residence cross-tabs at per-county and per-township resolution) reproduces macro-level commute patterns. A cordon-snap pass injects the out-of-bundle commute mass from neighbouring counties as anchored sinks at county centroids; a Generalized Iterative Proportional Fit (GIPF) pass then pins each township&#x27;s self-loop share to the per-township census ground truth for same-township commutes.</p>
 <p>Agriculture employment is dropped at the township grain using the DGBAS census employment-status counts (agricultural-sector employed persons per township) to avoid placing rural-residence farmers in workplace buildings, since the 2020 census records work location by residence rather than workplace for the agricultural cohort.</p>
 <h2>Primary Data Sources</h2>
 <ul>
-  <li>DGBAS — 主計總處 — 2020 Population &amp; Housing Census (township-level employment-status counts, per-county industry counts, workplace × residence cross-tabs, work-commute O/D matrices), 最小統計區 (Minimum Statistical Area) sub-里 census polygons with per-cell population, and 2021 工商業普查 (Industry &amp; Services Census — workplace persons-engaged by township × industry and by county × industry-major) (stat.gov.tw)</li>
-  <li>MOI — 內政部 — 戶政司 monthly village population (ODRP014 / ris.gov.tw) and 村里界圖 administrative boundary polygons (data.moi.gov.tw)</li>
-  <li>NLSC — 內政部國土測繪中心 — 國土利用調查 (NLUI) Level-2 land-use raster served via public WMS (maps.nlsc.gov.tw), and the 3D 精緻建物模型 LoD1 building footprint + height + floor count product (3dmaps.nlsc.gov.tw)</li>
-  <li>MOE — 教育部 — 大專校院校別資料 (per-school × 日間/進修 × degree-level enrollment) and institutional registry (stats.moe.gov.tw)</li>
-  <li>CAA — 民用航空局 — terminal-level annual passenger statistics (caa.gov.tw)</li>
-  <li>Tourism Administration — 交通部觀光署 — historical monthly visitor counts at major scenic &amp; recreation sites (data.gov.tw/dataset/8116) + Attraction Registry V2.1 (data.gov.tw/dataset/7777). Per-county methodology cross-check via 臺南市開放資料平臺 (data.tainan.gov.tw).</li>
+  <li><strong>DGBAS 主計總處 — 2020 Population &amp; Housing Census + 2021 工商業普查</strong> (township employment-status counts, per-county industry counts, workplace × residence commute O/D matrices, 最小統計區 sub-里 census polygons with per-cell population, and Industry &amp; Services Census workplace persons-engaged by township × industry) — <a href="https://www.stat.gov.tw/">stat.gov.tw</a></li>
+  <li><strong>MOI 內政部</strong> (戶政司 monthly village population ODRP014, and 村里界圖 administrative-boundary polygons) — <a href="https://www.ris.gov.tw/">ris.gov.tw</a> · <a href="https://data.moi.gov.tw/">data.moi.gov.tw</a></li>
+  <li><strong>NLSC 內政部國土測繪中心</strong> (國土利用調查 NLUI Level-2 land-use raster via public WMS, and the 3D 精緻建物模型 LoD1 building footprint + height + floor-count product) — <a href="https://maps.nlsc.gov.tw/">maps.nlsc.gov.tw</a> · <a href="https://3dmaps.nlsc.gov.tw/">3dmaps.nlsc.gov.tw</a></li>
+  <li><strong>MOE 教育部</strong> (大專校院校別資料 per-school × 日間 / 進修 × degree-level enrollment, and the institutional registry) — <a href="https://stats.moe.gov.tw/">stats.moe.gov.tw</a></li>
+  <li><strong>CAA 民用航空局</strong> (terminal-level annual passenger statistics) — <a href="https://www.caa.gov.tw/">caa.gov.tw</a></li>
+  <li><strong>Tourism Administration 交通部觀光署</strong> (historical monthly visitor counts at major scenic &amp; recreation sites + the Attraction Registry V2.1; per-county methodology cross-check via 臺南市開放資料平臺) — <a href="https://data.gov.tw/dataset/8116">觀光遊憩據點 (data.gov.tw)</a> · <a href="https://data.gov.tw/dataset/7777">Registry V2.1</a> · <a href="https://data.tainan.gov.tw/">data.tainan.gov.tw</a></li>
 </ul>
 <h2>Issues/Questions</h2>
-<p>Please raise an issue on this repository for incorrect manifests, broken download links, or release-page problems. Suggestions are welcome — especially pointers to Taiwanese open datasets that could improve existing bundles or unlock new categories (military bases and primary/secondary education are still scheduled for Phase E expansion).</p>
+<p>Please raise an issue on this repository for incorrect manifests, broken download links, or release-page problems. Suggestions are welcome — especially pointers to Taiwanese open datasets that could improve existing bundles or unlock new categories (military bases and primary / secondary education are still scheduled for a future release).</p>
 <h2>Known Issues</h2>
 <ul>
   <li>The published commute O/D matrix is the 2020 DGBAS census, which post-dates a partial pandemic disruption. The per-township GIPF calibration anchors the self-loop share to the census ground truth, but the cross-township flow structure inherits whatever residual COVID-era bias remains in the source.</li>
-  <li>Individual post-secondary education institutions are placed at a single point matching the registered institutional address, which may not reflect the actual spatial distribution of students across multiple campuses or satellite facilities. <strong>(Partially resolved in 0.2.0</strong> — 16 cross-county multi-campus institutions are now split across campuses by MOE 表A2-8 enrollment shares; per-faculty placement within a single campus is still planned for a future update.<strong>)</strong></li>
-  <li>Special demand currently covers airports, post-secondary education, tourism attractions, hospitals, ports, convention / exhibition centers, stadiums and arenas, and cultural centers. Military bases (MND garrison roster) and primary / secondary education will be added as Phase E data lands.</li>
-  <li>Tourism attraction visitor counts auto-skip area-level methodologies (電信數據 / 廟方估計 / 停車數概估 / 自動車流監視) per the 9-method counting spec. Methodology is only directly verifiable for ~30 Tainan facilities via the per-county feed; other counties rely on a name-pattern heuristic validated against the Tainan distribution. False positives (legitimately ticketed entries the heuristic flagged as district pass-through) can be re-added via the operator-curated override CSV.</li>
-  <li><del>Some coastal tiles on map edges do not render correctly due to a land mask polygon mismatch between the map boundaries and the &quot;unvierse&quot; tiles</del> <strong>(Resolved in 0.1.1)</strong></li>
-  <li><del>IPF based synthetic O/D is asymmetric (resident-side constraints) and therefore concentrates error in the workplace-side distribution (e.g. in Wanhua district)</del> <strong>(Resolved in 0.1.1)</strong></li>
+  <li>Individual post-secondary institutions are placed at a single point matching the registered institutional address, which may not reflect the actual spatial distribution of students across multiple campuses or satellite facilities. <strong>(Partially resolved in 0.2.0</strong> — cross-county multi-campus institutions are now split across campuses by MOE enrollment shares; per-faculty placement within a single campus is still planned for a future update.<strong>)</strong></li>
+  <li>Special demand currently covers airports, post-secondary education, tourism attractions, hospitals, ports, convention / exhibition centers, stadiums and arenas, and cultural centers. Military bases (MND garrison roster) and primary / secondary education will be added as data sources are curated.</li>
+  <li>Tourism attraction visitor counts auto-skip area-level methodologies (電信數據 / 廟方估計 / 停車數概估 / 自動車流監視) per the 9-method counting spec. Methodology is only directly verifiable for a subset of Tainan facilities via the per-county feed; other counties rely on a name-pattern heuristic validated against the Tainan distribution. False positives (legitimately ticketed entries the heuristic flagged as district pass-through) can be re-added via the operator-curated override list.</li>
+  <li><del>Some coastal tiles on map edges do not render correctly due to a land-mask polygon mismatch between the map boundaries and the &quot;universe&quot; tiles.</del> <strong>(Resolved in 0.1.1)</strong></li>
+  <li><del>The synthetic O/D is asymmetric (resident-side constraints) and therefore concentrates error in the workplace-side distribution (e.g. in Wanhua district).</del> <strong>(Resolved in 0.1.1)</strong></li>
 </ul>
-<h1>Changelog</h1>
-<h2>0.1.3 (2026-06-03)</h2>
-<h3>Updated Cities</h3>
+<h2>Changelog</h2>
+<h3>0.1.3 (2026-06-03)</h3>
+<h4>Updated Cities</h4>
 <ul>
-  <li><code>TPE</code> - 臺北 / Taipei</li>
-  <li><code>RMQ</code> - 臺中 / Taichung</li>
-  <li><code>KHH</code> - 高雄 / Kaohsiung</li>
-  <li><code>TNN</code> - 臺南 / Tainan</li>
-  <li><code>HSZ</code> - 新竹 / Hsinchu</li>
-  <li><code>CYI</code> - 嘉義 / Chiayi</li>
+  <li><code>TPE</code> - 臺北 (Taipei)</li>
+  <li><code>RMQ</code> - 臺中 (Taichung)</li>
+  <li><code>KHH</code> - 高雄 (Kaohsiung)</li>
+  <li><code>TNN</code> - 臺南 (Tainan)</li>
+  <li><code>HSZ</code> - 新竹 (Hsinchu)</li>
+  <li><code>CYI</code> - 嘉義 (Chiayi)</li>
 </ul>
-<h3>New Features</h3>
+<h4>New Features</h4>
 <ul>
   <li><strong>Track-collision now applies to small inland water.</strong> Previously the inland-water depth index sampled at ~300 m grid spacing and missed small streams, ponds, and irrigation lakes.</li>
-</ul>
-<ul>
   <li><strong>Traditional municipal flags.</strong> Taipei (臺北), Taichung (臺中), and Tainan (臺南) now display their traditional municipal flag designs.</li>
 </ul>
-<h3>Bugfixes</h3>
+<h4>Bugfixes</h4>
 <ul>
-  <li><strong>Subterranean canals no longer rendered as surface water and no longer block track.</strong> Hydropower diversion tunnels, anti-silt drains, and culverted irrigation channels were previously drawn as visible water polygons within the simulation -- these features are now filtered out of the water layer.</li>
-</ul>
-<ul>
-  <li><strong>Administrative-boundary parks no longer paint green over settled villages.</strong> OSM admin-boundary polygons of type (<code>nature_reserve</code>, <code>national_park</code>, <code>protected_area</code>, <code>allotments</code>) used to render as continuous green areas covering the residential areas inside their administrative footprints.</li>
-</ul>
-<ul>
+  <li><strong>Subterranean canals no longer rendered as surface water and no longer block track.</strong> Hydropower diversion tunnels, anti-silt drains, and culverted irrigation channels were previously drawn as visible water polygons within the simulation — these features are now filtered out of the water layer.</li>
+  <li><strong>Administrative-boundary parks no longer paint green over settled villages.</strong> OSM admin-boundary polygons (<code>nature_reserve</code>, <code>national_park</code>, <code>protected_area</code>, <code>allotments</code>) used to render as continuous green areas covering the residential areas inside their administrative footprints.</li>
   <li><strong>Coastline alignment between landuse and water.</strong> Landuse and water now share the exact same simplified vertex positions at every zoom level, eliminating thin sub-pixel overlap ribbons.</li>
 </ul>
-<h2>0.1.2 (2026-06-01)</h2>
-<h3>Updated Cities</h3>
+<h3>0.1.2 (2026-06-01)</h3>
+<h4>Updated Cities</h4>
 <ul>
-  <li><code>TPE</code> - 臺北 / Taipei</li>
-  <li><code>RMQ</code> - 臺中 / Taichung</li>
-  <li><code>KHH</code> - 高雄 / Kaohsiung</li>
-  <li><code>TNN</code> - 臺南 / Tainan</li>
-  <li><code>HSZ</code> - 新竹 / Hsinchu</li>
-  <li><code>CYI</code> - 嘉義 / Chiayi</li>
+  <li><code>TPE</code> - 臺北 (Taipei)</li>
+  <li><code>RMQ</code> - 臺中 (Taichung)</li>
+  <li><code>KHH</code> - 高雄 (Kaohsiung)</li>
+  <li><code>TNN</code> - 臺南 (Tainan)</li>
+  <li><code>HSZ</code> - 新竹 (Hsinchu)</li>
+  <li><code>CYI</code> - 嘉義 (Chiayi)</li>
 </ul>
-<h3>New Features</h3>
+<h4>New Features</h4>
 <ul>
   <li><strong>Broader rendered landuse coverage.</strong> Greenery rendering now resolves a wider palette of OSM landuse kinds.</li>
   <li style="margin-left: 1.25em;">The NLUI raster layer is still used for the workplace dasymetric upstream.</li>
-</ul>
-<ul>
   <li><strong>Coastal landuse no longer covers the ocean.</strong> The rendered landuse layer is now clipped to the authoritative MOI 村里界圖 land polygon, so coastal parks, forest, and other land features no longer extend offshore past the rendered ocean boundary.</li>
-</ul>
-<ul>
-  <li><strong>Multi-campus universities.</strong> Post-secondary institutions that operate across multiple campuses are now split across those campuses using the MOE 表A2-8 跨縣市學生人數統計 (cross-county student-distribution table), instead of being placed at a single registered institutional address. Total enrollment per institution is preserved.</li>
-</ul>
-<ul>
-  <li>New special demand categories added across all 6 bundles:</li>
-  <li style="margin-left: 1.25em;"><strong>Hospitals</strong> -- daily commute demand at inpatient and outpatient hospital facilities. Per-township acute bed counts from MOHW are allocated across hospitals within each township by NLUI Level-2 health-classification building floor area, anchored to the NHI 健保特約醫事機構 national provider register, and outpatient demand sized from per-county outpatient visit rates.</li>
-</ul>
-<ul>
-  <li style="margin-left: 1.25em;"><strong>Ports</strong> -- new demand points at the main commercial ports and busiest passenger ferry routes, sized from Taiwan International Ports Corporation (TIPC) annual passenger statistics and operator-published route reports.</li>
-</ul>
-<ul>
-  <li style="margin-left: 1.25em;"><strong>Convention and exhibition centers</strong> -- new demand points at major MICE venues, sized from operator-published ESG and annual reports.</li>
-</ul>
-<ul>
-  <li style="margin-left: 1.25em;"><strong>Stadiums and arenas</strong> -- new demand points at professional sport venues including CPBL baseball stadiums and PLG / T1 basketball arenas, sized from published league attendance reports.</li>
-</ul>
-<ul>
-  <li style="margin-left: 1.25em;"><strong>Cultural centers</strong> -- new demand points at county and city 文化局 / 藝文中心 facilities.</li>
-</ul>
-<ul>
-  <li><strong>Tourism attraction coverage expanded.</strong> The base 交通部觀光署 dataset has been supplemented with operator-published visitor counts from county and city tourism portals.</li>
+  <li><strong>Multi-campus universities.</strong> Post-secondary institutions that operate across multiple campuses are now split across those campuses using the MOE cross-county student-distribution table, instead of being placed at a single registered institutional address. Total enrollment per institution is preserved.</li>
+  <li><strong>New special-demand categories.</strong> Added across all bundles:</li>
+  <li style="margin-left: 1.25em;"><strong>Hospitals</strong> — daily commute demand at inpatient and outpatient facilities. Per-township acute bed counts from MOHW are allocated across hospitals within each township by NLUI Level-2 health-classification building floor area, anchored to the NHI 健保特約醫事機構 national provider register, with outpatient demand sized from per-county outpatient visit rates.</li>
+  <li style="margin-left: 1.25em;"><strong>Ports</strong> — demand at the main commercial ports and busiest passenger-ferry routes, sized from Taiwan International Ports Corporation (TIPC) annual passenger statistics and operator-published route reports.</li>
+  <li style="margin-left: 1.25em;"><strong>Convention &amp; exhibition centers</strong> — demand at major MICE venues, sized from operator-published ESG and annual reports.</li>
+  <li style="margin-left: 1.25em;"><strong>Stadiums &amp; arenas</strong> — demand at professional sport venues including CPBL baseball stadiums and PLG / T1 basketball arenas, sized from published league attendance reports.</li>
+  <li style="margin-left: 1.25em;"><strong>Cultural centers</strong> — demand at county and city 文化局 / 藝文中心 facilities.</li>
+  <li><strong>Tourism attraction coverage expanded.</strong> The base 交通部觀光署 dataset is supplemented with operator-published visitor counts from county and city tourism portals.</li>
   <li style="margin-left: 1.25em;">Some multi-anchor scenic complexes are now split across constituent sub-locations rather than concentrated on a single point.</li>
   <li style="margin-left: 1.25em;">A tier-based haircut calibrates the visit-count-to-commute-demand conversion for area-level methodology entries (telco, parking-based estimation, traffic monitoring) that were previously over-credited.</li>
+  <li><strong>Building-classification refinements.</strong> Malformed source building footprints that aggregated multiple separate facilities into a single oversized polygon are excluded from both workplace calibration and the final exported tiles.</li>
 </ul>
+<h4>Bugfixes</h4>
 <ul>
-  <li><strong>Building-classification refinements.</strong> Malformed source building footprints that aggregated multiple separate facilities into a single oversized polygon have been excluded from both workplace calibration and the final exported tiles.</li>
-</ul>
-<h3>Bugfixes</h3>
-<ul>
-  <li><strong>Residential coverage for newly created villages.</strong> Recent post-2020 administrative splits and 里 created as a result were previously receiving zero residents because the MOI 村里界圖 boundary shapefile used at build time post-dates the village-level population CSV.</li>
+  <li><strong>Residential coverage for newly created villages.</strong> Recent post-2020 administrative splits and the 里 created as a result previously received zero residents because the MOI 村里界圖 boundary shapefile used at build time post-dates the village-level population data.</li>
   <li style="margin-left: 1.25em;">The build now uses dual-vintage MOI 戶政司 population data — the 2020 DGBAS census anchor combined with the latest matched monthly release — and rescales the newer distribution against the census anchor at the township grain.</li>
   <li style="margin-left: 1.25em;">Residents are restored to all affected villages while township totals remain pinned to the official census anchor.</li>
-</ul>
-<ul>
   <li><strong>Spurious NLSC building artifacts removed.</strong> A small fraction of the NLSC LoD1 3D building model carried photogrammetric artifacts that surfaced as visible bugs in earlier renders. Two classes are now filtered:</li>
-  <li style="margin-left: 1.25em;"><em>Ribbon footprints</em> — long thin polygons (likely at the seams of a scan) that are improbably long are now excluded.</li>
-  <li style="margin-left: 1.25em;"><em>Corrupted floor counts</em> — individual records carrying impossibly high <code>floors</code> values (catastrophic example: 9,935 floors encoding as a 32 km tall building, plus a handful of rural-district records claiming 50-170 floors). The building footprint is preserved; only the <code>height</code> and <code>floors</code> fields are normalized.</li>
+  <li style="margin-left: 1.25em;"><em>Ribbon footprints</em> — improbably long thin polygons (likely at the seams of a scan) are excluded.</li>
+  <li style="margin-left: 1.25em;"><em>Corrupted floor counts</em> — individual records carrying impossibly high floor values (e.g. a floor count encoding as a 32 km-tall building) are normalized; the building footprint is preserved, only the height and floor fields are reset.</li>
 </ul>
-<h2>0.1.1 (2026-05-26)</h2>
-<h3>Updated Cities</h3>
+<h3>0.1.1 (2026-05-26)</h3>
+<h4>Updated Cities</h4>
 <ul>
-  <li><code>TPE</code> - 臺北 / Taipei</li>
-  <li><code>RMQ</code> - 臺中 / Taichung</li>
-  <li><code>KHH</code> - 高雄 / Kaohsiung</li>
-  <li><code>TNN</code> - 臺南 / Tainan</li>
-  <li><code>HSZ</code> - 新竹 / Hsinchu</li>
-  <li><code>CYI</code> - 嘉義 / Chiayi</li>
+  <li><code>TPE</code> - 臺北 (Taipei)</li>
+  <li><code>RMQ</code> - 臺中 (Taichung)</li>
+  <li><code>KHH</code> - 高雄 (Kaohsiung)</li>
+  <li><code>TNN</code> - 臺南 (Tainan)</li>
+  <li><code>HSZ</code> - 新竹 (Hsinchu)</li>
+  <li><code>CYI</code> - 嘉義 (Chiayi)</li>
 </ul>
-<h3>Bugfixes</h3>
+<h4>New Features</h4>
 <ul>
-  <li>Coastline rendering — fixed grid-like artifacts and rectangular intrusions at the map&#x27;s land/ocean boundary, most visible along the western edge of southwest Pingtung county.</li>
-  <li>Inland water and rivers — rivers that cross the bundle edge now extend past the map boundary instead of being sharply cut off; small redundant river polygons inside larger estuarine water bodies are no longer rendered as incongruous fragments at river mouths.</li>
-  <li>Map labels — city, town, and locality labels from outside the bundle no longer bleed through (e.g. Kaohsiung&#x27;s major label no longer appears in Tainan, Tainan&#x27;s no longer in Chiayi).</li>
-  <li>Inland depth-index — pockets of inland farmland are no longer mis-marked as ocean in the runtime depth lookup, eliminating spurious &quot;ocean over land&quot; cells.</li>
+  <li><strong>Workplace-side O/D constraint.</strong> The synthetic origin/destination commute pass now keys the township-level constraint on the workplace side, removing the resident-side asymmetry that previously concentrated error in residential townships.</li>
+  <li><strong>Taipei (TPE) multi-centre labeling.</strong> Designated-city scope now anchors on multiple city centres across the metropolitan area for improved label centering.</li>
 </ul>
-<h3>New Features</h3>
+<h4>Bugfixes</h4>
 <ul>
-  <li>The synthetic origin/destination commute pass now keys the township-level constraint on the workplace side, removing the resident-side asymmetry that previously concentrated error in residential townships.</li>
-  <li><strong>Taipei (TPE)</strong> — designated-city scope now anchors on multiple city centres across the metropolitan area for improved label centering.</li>
+  <li><strong>Coastline rendering.</strong> Fixed grid-like artifacts and rectangular intrusions at the map&#x27;s land / ocean boundary, most visible along the western edge of southwest Pingtung county.</li>
+  <li><strong>Inland water and rivers.</strong> Rivers that cross the bundle edge now extend past the map boundary instead of being sharply cut off; small redundant river polygons inside larger estuarine water bodies are no longer rendered as incongruous fragments at river mouths.</li>
+  <li><strong>Map labels.</strong> City, town, and locality labels from outside the bundle no longer bleed through (e.g. Kaohsiung&#x27;s major label no longer appears in Tainan, Tainan&#x27;s no longer in Chiayi).</li>
+  <li><strong>Inland depth-index.</strong> Pockets of inland farmland are no longer mis-marked as ocean in the runtime depth lookup, eliminating spurious &quot;ocean over land&quot; cells.</li>
 </ul>
-<h2>0.1.0 (2026-05-24)</h2>
-<h3>Initial Cities</h3>
+<h3>0.1.0 (2026-05-24)</h3>
+<h4>Initial Cities</h4>
 <ul>
-  <li><code>TPE</code> - 臺北 / Taipei</li>
-  <li><code>RMQ</code> - 臺中 / Taichung</li>
-  <li><code>KHH</code> - 高雄 / Kaohsiung</li>
-  <li><code>TNN</code> - 臺南 / Tainan</li>
-  <li><code>HSZ</code> - 新竹 / Hsinchu</li>
-  <li><code>CYI</code> - 嘉義 / Chiayi</li>
+  <li><code>TPE</code> - 臺北 (Taipei)</li>
+  <li><code>RMQ</code> - 臺中 (Taichung)</li>
+  <li><code>KHH</code> - 高雄 (Kaohsiung)</li>
+  <li><code>TNN</code> - 臺南 (Tainan)</li>
+  <li><code>HSZ</code> - 新竹 (Hsinchu)</li>
+  <li><code>CYI</code> - 嘉義 (Chiayi)</li>
 </ul>
-<h3>New Features</h3>
+<h4>New Features</h4>
 <ul>
-  <li>First release of the Taiwan maps.</li>
-  <li>里-level (village/borough) resident and worker placement for all six bundles, calibrated against the DGBAS 2020 census and the 2021 工商業普查.</li>
-  <li>NLSC LoD1 is the canonical TW building source, providing surveyed per-building height and floor count for the entire island.</li>
-  <li>Phase E special demand for airports and post-secondary education institutions (universities + 專科學校) are included with a small haircut applied to enrollment counts so the modeled on-site demand matches more realistically the trips generated by the daytime (日間) cohort.</li>
-  <li>Cordon-snap injection of out-of-bundle commute mass plus a GIPF pass that pins each township&#x27;s self-loop share to the per-township DGBAS census ground truth for same-township commutes.</li>
+  <li><strong>First release of the Taiwan maps.</strong> 里-level (village / borough) resident and worker placement for all six bundles, calibrated against the DGBAS 2020 census and the 2021 工商業普查.</li>
+  <li><strong>NLSC LoD1 buildings.</strong> The canonical TW building source, providing surveyed per-building height and floor count for the entire island.</li>
+  <li><strong>Special demand for airports and post-secondary education.</strong> Universities and 專科學校 included, with a haircut applied to enrollment counts so modeled on-site demand better matches the trips generated by the daytime (日間) cohort.</li>
+  <li><strong>Commute calibration.</strong> Cordon-snap injection of out-of-bundle commute mass plus a GIPF pass that pins each township&#x27;s self-loop share to the per-township DGBAS census ground truth for same-township commutes.</li>
 </ul>
-<h1>Planned Updates</h1>
+<h2>Planned Updates</h2>
 <ul>
-  <li><strong>Coastal bathymetry (Taiwan Strait + Pacific)</strong> is scheduled for a v2 release — GEBCO global GeoTIFF support has been wired but the file is not yet shipped, so coastal cells still default to flat −4 m.</li>
+  <li><strong>Coastal bathymetry (Taiwan Strait + Pacific)</strong> is scheduled for a future release — coastal cells currently default to a flat −4 m.</li>
 </ul>
+<h2>Special Demand Details</h2>
+<p>Per-category breakdown of the modeled demand-point categories beyond residence and workplace commute. Each category is geocoded against the relevant authoritative source and sized from operator- or government-published visitor / passenger / enrollment / bed-count figures.</p>
+<ul>
+  <li><strong>Airports</strong></li>
+  <li style="margin-left: 1.25em;">Demand based on annualized passenger statistics from the 民用航空局 (Civil Aeronautics Administration / CAA), across the international and domestic terminals.</li>
+  <li><strong>Institutions of Learning</strong></li>
+  <li style="margin-left: 1.25em;">Post-secondary students (大學 / 專科學校) sized from official daytime (日間) per-school enrollment published by the 教育部 (Ministry of Education / MOE), filtered to the latest academic year. Campus locations are recovered via a layered OSM exact-name + Wikidata + manual-curation pipeline; multi-campus institutions are split across campuses by MOE enrollment shares.</li>
+  <li><strong>Tourism Attractions</strong></li>
+  <li style="margin-left: 1.25em;">Annual visitor counts at major 觀光遊憩據點 (scenic &amp; recreation sites) from the 交通部觀光署 (Tourism Administration) national rollup, filtered to facility-anchored counting methods (門票數 / 人工計數器 / 柵欄式計數設備 / AI 精密人流偵測 / 電子計數器). Area-level methods (telco, temple self-report, parking-based estimation, traffic monitoring) are auto-skipped to avoid double-counting district pass-through traffic already captured by residential gravity; a methodology cross-check uses the per-county 觀光遊憩月報 feed. Coordinates resolve via the Tourism Administration Attraction Registry V2.1.</li>
+  <li><strong>Hospitals</strong></li>
+  <li style="margin-left: 1.25em;">Daily commute demand at inpatient and outpatient facilities. Per-township acute bed counts from MOHW are allocated across hospitals by NLUI Level-2 health-classification building floor area, anchored to the NHI national provider register, with outpatient demand sized from per-county outpatient visit rates.</li>
+  <li><strong>Ports</strong></li>
+  <li style="margin-left: 1.25em;">Demand at the main commercial ports and busiest passenger-ferry routes, sized from Taiwan International Ports Corporation (TIPC) annual passenger statistics and operator route reports.</li>
+  <li><strong>Convention &amp; Exhibition Centers</strong></li>
+  <li style="margin-left: 1.25em;">Demand at major MICE venues, sized from operator-published ESG and annual reports.</li>
+  <li><strong>Sports Venues</strong></li>
+  <li style="margin-left: 1.25em;">Demand at professional sport venues including CPBL baseball stadiums and PLG / T1 basketball arenas, sized from published league attendance reports.</li>
+  <li><strong>Cultural Centers</strong></li>
+  <li style="margin-left: 1.25em;">Demand at county and city 文化局 / 藝文中心 facilities.</li>
+</ul>
+<h2>License</h2>
+<p>All maps are released under the <a href="https://github.com/ahkimn/subwaybuilder-tw-maps/blob/main/LICENSE">GNU General Public License v3.0</a>.</p>
+<h2>Credits</h2>
+<p>All maps authored by <a href="https://subwaybuildermodded.com/credits/">Yukina-</a></p>
     </article>
   </section>
 </body>

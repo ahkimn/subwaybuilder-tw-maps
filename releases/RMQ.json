@@ -2,6 +2,16 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.3.0",
+      "min_game_version": ">=1.0.0",
+      "max_game_version": null,
+      "game_version": ">=1.0.0",
+      "date": "2026-07-15",
+      "changelog": "Map pack update.",
+      "download": "https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.2.0/RMQ.zip",
+      "sha256": "86f2f6847bfee6ddf213086c095a8c99a2d73f711d1e4eeb11e68248dbeb240b"
+    },
+    {
       "version": "0.2.1",
       "game_version": "<= 1.3.0",
       "date": "2026-06-03",

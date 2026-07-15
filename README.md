@@ -8,10 +8,11 @@ Each map covers the metropolitan area around one or more major Taiwanese cities.
 
 - High level of detail, with sub-村里 population placement driven by the DGBAS 最小統計區 (Minimum Statistical Area) census polygons — the official sub-里 census product carrying per-cell population direct from the household register — and refined within each cell by NLUI Level-2 residential floor area (pure 0502 + mixed-use 0503) summed from NLSC LoD1 building footprints.
 - Spatial realism — points are assigned in a manner that is aware of water features, mountain-indigenous reserve areas, and density-weighted placement surfaces.
-- Special demand from several sources is modeled where Taiwanese open data is available — covering airports, universities and colleges, tourism attractions, hospitals, ports, convention centers, sports venues, and cultural centers. See [Special Demand Details](#special-demand-details) below for the per-category breakdown.
+- Special demand from several sources is modeled where Taiwanese open data is available — covering airports, universities and colleges, tourism attractions, hospitals, ports, convention centers, sports venues, cultural centers, and libraries. See [Special Demand Details](#special-demand-details) below for the per-category breakdown.
 - Buildings are sourced from NLSC LoD1 (內政部國土測繪中心 3D 精緻建物模型), with surveyed per-building height and floor count for the entire island.
 - OSRM routing is included, with a scaling time penalty based on commute distance and metropolitan-area size.
-- Building foundation depth defaults to −10 m, with train-related infrastructure exempt.
+- Building foundation depth is modeled per building from height and footprint width — deeper for tall, slender towers up to a cap and shallow for low-rise — with freestanding towers held shallow and train-related infrastructure exempt.
+- Coastal seafloor depth is modeled from GEBCO global bathymetry, smoothed and aligned to the rendered coastline.
 
 ## High-Level Methodology
 
@@ -29,6 +30,8 @@ Agriculture employment is dropped at the township grain using the DGBAS census e
 - **MOE 教育部** (大專校院校別資料 per-school × 日間 / 進修 × degree-level enrollment, and the institutional registry) — [stats.moe.gov.tw](https://stats.moe.gov.tw/)
 - **CAA 民用航空局** (terminal-level annual passenger statistics) — [caa.gov.tw](https://www.caa.gov.tw/)
 - **Tourism Administration 交通部觀光署** (historical monthly visitor counts at major scenic & recreation sites + the Attraction Registry V2.1; per-county methodology cross-check via 臺南市開放資料平臺) — [觀光遊憩據點 (data.gov.tw)](https://data.gov.tw/dataset/8116) · [Registry V2.1](https://data.gov.tw/dataset/7777) · [data.tainan.gov.tw](https://data.tainan.gov.tw/)
+- **National Central Library 國家圖書館** (public-library circulation statistics from the 公共圖書館統計系統, used to size and distribute library demand) — [publibstat.ncl.edu.tw](https://publibstat.ncl.edu.tw/)
+- **GEBCO** (global ocean bathymetry — the coastal seafloor depth gradient) — [gebco.net](https://www.gebco.net/data_and_products/gridded_bathymetry_data/)
 
 ## Issues/Questions
 
@@ -40,10 +43,38 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - Individual post-secondary institutions are placed at a single point matching the registered institutional address, which may not reflect the actual spatial distribution of students across multiple campuses or satellite facilities. **(Partially resolved in 0.2.0** — cross-county multi-campus institutions are now split across campuses by MOE enrollment shares; per-faculty placement within a single campus is still planned for a future update.**)**
 - Special demand currently covers airports, post-secondary education, tourism attractions, hospitals, ports, convention / exhibition centers, stadiums and arenas, and cultural centers. Military bases (MND garrison roster) and primary / secondary education will be added as data sources are curated.
 - Tourism attraction visitor counts auto-skip area-level methodologies (電信數據 / 廟方估計 / 停車數概估 / 自動車流監視) per the 9-method counting spec. Methodology is only directly verifiable for a subset of Tainan facilities via the per-county feed; other counties rely on a name-pattern heuristic validated against the Tainan distribution. False positives (legitimately ticketed entries the heuristic flagged as district pass-through) can be re-added via the operator-curated override list.
+- The NLSC LoD1 building model is a LiDAR + photogrammetric hybrid product, and some building footprints carry artifacts (e.g. fusing a podium and tower into a single polygon, or having certain areas of the footprint mischaracterized in height).
+  - In addition, a single building may be a composite of multiple, often overlapping parts; each of these parts is persisted independently into the buildings index and treated separately for collisions.
 - ~~Some coastal tiles on map edges do not render correctly due to a land-mask polygon mismatch between the map boundaries and the "universe" tiles.~~ **(Resolved in 0.1.1)**
 - ~~The synthetic O/D is asymmetric (resident-side constraints) and therefore concentrates error in the workplace-side distribution (e.g. in Wanhua district).~~ **(Resolved in 0.1.1)**
 
 ## Changelog
+
+### 0.2.0 (2026-07-15)
+
+#### Updated Cities
+
+- `TPE` - 臺北 (Taipei)
+- `RMQ` - 臺中 (Taichung)
+- `KHH` - 高雄 (Kaohsiung)
+- `TNN` - 臺南 (Tainan)
+- `HSZ` - 新竹 (Hsinchu)
+- `CYI` - 嘉義 (Chiayi)
+
+#### New Features
+
+- **Coastal bathymetry.** Coastal seafloor depth is now modeled from real global bathymetric soundings (GEBCO 2026) as an independently interpolated depth gradient, replacing the previous flat −5 m default — depth-banded contours are smoothed and aligned to the coastline, and the seafloor is rebuilt from the same geometry as the rendered water so the two stay consistent at every zoom.
+  - Taiwan is modeled from the GEBCO global grid rather than the Japanese J-EGG500 survey used for the Japan maps; the coastline follows the OpenStreetMap water boundary the maps already render, the nearshore and offshore seafloor are built as one continuous surface so depth no longer steps at the shelf edge, and a hand-curated override fills a few estuary shoals that every global source mis-reads at the shore.
+
+- **Per-building foundation depth.** A building's foundation — the below-ground volume a subway tunnel must clear — is now modeled per building from its height and footprint width rather than the previous flat −10 m default; mid- and high-rise foundations deepen with height and slenderness up to a cap, while low-rise buildings sit at a shallow minimum, and freestanding towers are detected and held at the minimum rather than given a deep foundation.
+
+- **Libraries.** Public libraries are now modeled as daily-commute demand points, sized from National Central Library circulation statistics. System-level circulation is distributed across individual branches, with a footfall correction that reconciles systems whose visit counts are recorded on a different basis so no single branch is over- or under-credited relative to its true share.
+
+#### Other Features
+
+- **Updated buildings index.** The buildings index for each map is now packaged in both `.bin` and `.json` formats for compatibility with the most recent versions of the simulation engine.
+
+- **Added compatibility for the bridges/tunnels layer.** The sim can now distinguish bridges and tunnels via a `structure` field carried on the road output.
 
 ### 0.1.3 (2026-06-03)
 
@@ -147,7 +178,8 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 ## Planned Updates
 
-- **Coastal bathymetry (Taiwan Strait + Pacific)** is scheduled for a future release — coastal cells currently default to a flat −4 m.
+- **Military bases** are scheduled for a future release, once the garrison roster and per-base personnel estimates are curated.
+- **Primary and secondary education** demand is scheduled for a future release.
 
 ## Special Demand Details
 
@@ -169,6 +201,8 @@ Per-category breakdown of the modeled demand-point categories beyond residence a
   - Demand at professional sport venues including CPBL baseball stadiums and PLG / T1 basketball arenas, sized from published league attendance reports.
 - **Cultural Centers**
   - Demand at county and city 文化局 / 藝文中心 facilities.
+- **Libraries**
+  - Demand at public libraries, sized from National Central Library (國家圖書館) circulation statistics. System-level circulation is distributed across branches, with a footfall correction reconciling systems whose visit counts are recorded on a different basis.
 
 ## License
 

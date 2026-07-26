@@ -50,6 +50,12 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 ## Changelog
 
+### 0.2.1 (upcoming)
+
+#### Bugfixes
+
+- **Fixed over-drawn building foundations.** Building foundations were not thinned out at lower zoom levels the way their buildings are, so foundations lingered where the building itself had dropped from view — and the redundant foundations needlessly enlarged the map download. Each foundation is now drawn only where its building is.
+
 ### 0.2.0 (2026-07-15)
 
 #### Updated Cities

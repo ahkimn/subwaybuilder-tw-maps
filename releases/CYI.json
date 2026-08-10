@@ -7,7 +7,7 @@
       "max_game_version": null,
       "game_version": ">=1.0.0",
       "date": "2026-07-15",
-      "changelog": "Map pack update.",
+      "changelog": "Added modeled coastal seafloor depth from real bathymetry, per-building foundation depth, and public-library commute demand points.",
       "download": "https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.2.0/CYI.zip",
       "sha256": "a11f1a8df0c63afd744428b153f07219813695df88e6053287ff26378f507b54"
     },
@@ -15,7 +15,7 @@
       "version": "0.2.1",
       "game_version": "<= 1.3.0",
       "date": "2026-06-03",
-      "changelog": "Rendered landuse now resolves a wider OSM greenery palette (forest, wood, grass, meadow, cemetery, orchard, nature reserve, etc.) into the in-game park umbrella, so far more parkland, forest, and natural cover renders than in 0.1.x. Added hospital, port, convention / exhibition center, stadium and arena, and cultural-center demand. Multi-campus universities are now split across their campuses, attraction coverage expanded, and resident coverage restored for newly created villages. **0.2.1**: track-collision now applies to small streams, ponds, and irrigation lakes (previously only large rivers / reservoirs registered). Cleaner mountain rendering — subterranean canals (anti-silt tunnels, power-plant diversions, culverted irrigation) are no longer drawn on the surface, and admin-boundary nature reserves / national parks (e.g. Yangmingshan) no longer paint green over the settled villages inside them. Landuse and water now align at every zoom level so coastlines no longer show thin overlap artifacts.",
+      "changelog": "Fixed small streams and buried canals rendering as blocking surface water, stopped admin-boundary parks painting green over villages, and added traditional municipal flags.",
       "download": "https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.3/CYI.zip",
       "sha256": "f9734ce2cb95bf2602a5d6bc120b32a6fdf36d59ab1748ed9eb8ac66b57b6497"
     },
@@ -23,7 +23,7 @@
       "version": "0.2.0",
       "game_version": "<= 1.3.0",
       "date": "2026-06-01",
-      "changelog": "Rendered landuse now resolves a wider OSM greenery palette (forest, wood, grass, meadow, cemetery, orchard, nature reserve, etc.) into the in-game park umbrella, so far more parkland, forest, and natural cover renders than in 0.1.x. Added hospital, port, convention / exhibition center, stadium and arena, and cultural-center demand. Multi-campus universities are now split across their campuses, attraction coverage expanded, and resident coverage restored for newly created villages.",
+      "changelog": "Expanded rendered greenery across more landuse types and added hospital, port, convention-center, stadium, and cultural-center demand, plus multi-campus university splitting.",
       "download": "https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.2/CYI.zip",
       "sha256": "ba4b8a50a8cf39e015203efcced390995a19ef2629558b7a36ef2243a3c92c73"
     },
@@ -31,7 +31,7 @@
       "version": "0.1.1",
       "game_version": "<=1.3.0",
       "date": "2026-05-25",
-      "changelog": "Improved coastline accuracy and inland water/river representation, fixed neighbouring-city label bleed, and refined origin/destination commute distribution.",
+      "changelog": "Improved coastline and inland river rendering, stopped neighbouring-city labels from bleeding across bundles, and refined the workplace-side commute distribution.",
       "download": "https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.1/CYI.zip",
       "sha256": "18ad0937caa8726aabd651b4535326c7311fed1dc22a9cc521b99c211f3e51b2"
     },
@@ -39,7 +39,7 @@
       "version": "0.1.0",
       "game_version": "<=1.3.0",
       "date": "2026-05-24",
-      "changelog": "New in 0.1.0",
+      "changelog": "Added the initial Taiwan map pack — Taipei, Taichung, Kaohsiung, Tainan, Hsinchu, and Chiayi — with census-calibrated residents and workers, NLSC LoD1 buildings, and airport and university demand.",
       "download": "https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/CYI.zip",
       "sha256": "c88fc50f4dc6b21a2b7ced157327a24cda6c3f9b24c84e35a749d24ddb0175be"
     }

@@ -50,11 +50,34 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 ## Changelog
 
-### 0.2.1 (upcoming)
+### 0.3.0 (2026-08-12)
+
+#### New Cities
+
+- `YIL` - 宜蘭 (Yilan)
+- `TTT` - 花蓮・臺東 (Hualien & Taitung)
+- `NTW` - 南臺灣 (Southern Taiwan)
+
+#### Updated Cities
+
+- `TPE` - 臺北 (Taipei)
+- `RMQ` - 臺中 (Taichung)
+- `KHH` - 高雄 (Kaohsiung)
+- `TNN` - 臺南 (Tainan)
+- `HSZ` - 新竹 (Hsinchu)
+- `CYI` - 嘉義 (Chiayi)
+
+#### New Features
+
+- **Three new maps covering eastern and southern Taiwan.** Yilan and the Hualien–Taitung east coast bring the full east coast into the map pack, and a combined Southern Taiwan map covers the Chiayi, Tainan, and Kaohsiung regions together as a single large map.
+- **Expanded map boundaries.** The existing maps' boundaries are expanded and to fill the entire main island, with indigeneous townships now being fully represented.
+- **More realistic commute routing.** Commute patterns now match the Ministry of Transportation and Communications national travel survey's by-county travel distances. This is a mirror of the recent `jp-maps` change; the distance-decay curve is calibrated per map, and township level O/D routing is now done in a deterministic fashion that reduces skew.
+- **Restored coverage in unsurveyed townships.** Rural townships that the national land-use survey leaves unclassified, most notably across Taitung, previously received no modeled residents or workers. This was mostly unproblematic in previous releases, but with the expanded coverage, the gap has now been triaged. Unsurveyed areas fall back to OpenStreetMap/Overtrue land use, so even the most remote areas are modeled, even if to a lower fidelity than the metro areas.
 
 #### Bugfixes
 
-- **Fixed over-drawn building foundations.** Building foundations were not thinned out at lower zoom levels the way their buildings are, so foundations lingered where the building itself had dropped from view — and the redundant foundations needlessly enlarged the map download. Each foundation is now drawn only where its building is.
+- **Corrected residential counts where the register and census diverge.** In villages where the household-registration population and the census de-facto population differ sharply (strong in- or out-migration areas), resident counts are reconciled against the census density signal while each township's official total is preserved.
+- **Removed remaining malformed building footprints.** A class of oversized composite footprints — where the source model fused many separate buildings into one amorphous polygon — is now dropped from both the rendered tiles and the buildings collision index.
 
 ### 0.2.0 (2026-07-15)
 

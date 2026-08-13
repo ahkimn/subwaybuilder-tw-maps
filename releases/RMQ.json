@@ -2,46 +2,61 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.4.0",
+      "min_game_version": ">=1.0.0",
+      "max_game_version": null,
+      "game_version": ">=1.0.0",
+      "date": "2026-08-13",
+      "changelog": "Sharpened commute routing to match the national travel survey, corrected village residential counts against the census, and removed remaining malformed building footprints and over-drawn foundations.",
+      "download": "https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.3.0/RMQ.zip",
+      "sha256": "9f27e5b9255df09b7941d71f595cee67e1fb1d2ee868f136ff5b11b1daa5f054"
+    },
+    {
       "version": "0.3.0",
       "min_game_version": ">=1.0.0",
       "max_game_version": null,
       "game_version": ">=1.0.0",
       "date": "2026-07-15",
       "changelog": "Added modeled coastal seafloor depth from real bathymetry, per-building foundation depth, and public-library commute demand points.",
-      "download": "https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.2.0/RMQ.zip",
-      "sha256": "86f2f6847bfee6ddf213086c095a8c99a2d73f711d1e4eeb11e68248dbeb240b"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.2.1",
       "game_version": "<= 1.3.0",
       "date": "2026-06-03",
       "changelog": "Fixed small streams and buried canals rendering as blocking surface water, stopped admin-boundary parks painting green over villages, and added traditional municipal flags.",
-      "download": "https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.3/RMQ.zip",
-      "sha256": "aca615fca1462c8557bda761cdc6210e5811fdfa44b7b615fdd13bf20722cb9d"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.2.0",
       "game_version": "<= 1.3.0",
       "date": "2026-06-01",
       "changelog": "Expanded rendered greenery across more landuse types and added hospital, port, convention-center, stadium, and cultural-center demand, plus multi-campus university splitting.",
-      "download": "https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.2/RMQ.zip",
-      "sha256": "c5db8f3704426e14955a54b1c521819cddc7feb4647f5818ad77f839ca3ee7cc"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.1.1",
       "game_version": "<=1.3.0",
       "date": "2026-05-25",
       "changelog": "Improved coastline and inland river rendering, stopped neighbouring-city labels from bleeding across bundles, and refined the workplace-side commute distribution.",
-      "download": "https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.1/RMQ.zip",
-      "sha256": "7456aacf3129033f24f9c52b5157d800da91be7ed45b5f32f0809461845bdc81"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.1.0",
       "game_version": "<=1.3.0",
       "date": "2026-05-24",
       "changelog": "Added the initial Taiwan map pack — Taipei, Taichung, Kaohsiung, Tainan, Hsinchu, and Chiayi — with census-calibrated residents and workers, NLSC LoD1 buildings, and airport and university demand.",
-      "download": "https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.1.0/RMQ.zip",
-      "sha256": "0939c088f584cb4d744f509958d1a8b06ca3b00a5216b8bfeafcd45a262506a5"
+      "download": null,
+      "sha256": null,
+      "retired": true
     }
   ]
 }

@@ -50,6 +50,28 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 ## Changelog
 
+### 0.3.1 (2026-08-19)
+
+#### Updated Cities
+
+- `TPE` - 臺北 (Taipei)
+- `RMQ` - 臺中 (Taichung)
+- `KHH` - 高雄 (Kaohsiung)
+- `TNN` - 臺南 (Tainan)
+- `HSZ` - 新竹 (Hsinchu)
+- `CYI` - 嘉義 (Chiayi)
+- `NTW` - 南臺灣 (Southern Taiwan)
+- `TTT` - 花蓮・臺東 (Hualien & Taitung)
+- `YIL` - 宜蘭 (Yilan)
+
+#### New Features
+
+- **Demand detail scales better with local density.** Mid-density residential areas now hold a consistent level of detail instead of being squeezed by the settings dense city centres need.
+
+#### Bugfixes
+
+- **Fixed shattered water at low zoom.** Simplifying for zoomed-out views was fattening narrow streams into slivers far wider than the real watercourse; thin features are now culled before that simplification rather than after. Land use is rebuilt alongside so the two layers stay aligned.
+
 ### 0.3.0 (2026-08-12)
 
 #### New Cities

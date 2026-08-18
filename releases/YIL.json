@@ -2,14 +2,25 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.1.1",
+      "min_game_version": ">=1.0.0",
+      "max_game_version": null,
+      "game_version": ">=1.0.0",
+      "date": "2026-08-19",
+      "changelog": "Fixed water shattering at low zoom, where simplification had fattened narrow streams into slivers far wider than the real watercourse, and rebalanced demand-point detail so mid-density residential areas hold consistent detail while city centres keep full resolution.",
+      "download": "https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.3.1/YIL.zip",
+      "sha256": "a1cfce45f21453b78ff4c486b14eecdc311303f40a0920a2412f12b50035c757"
+    },
+    {
       "version": "0.1.0",
       "min_game_version": ">=1.0.0",
       "max_game_version": null,
       "game_version": ">=1.0.0",
       "date": "2026-08-13",
       "changelog": "Initial release — village-level census-calibrated residents and workers, NLSC LoD1 buildings, and airport, university, tourism, hospital, port, stadium, cultural-center, and library demand.",
-      "download": "https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.3.0/YIL.zip",
-      "sha256": "eca09863f7ce86ddc5c4d64ebbdfa5f6c1fe0acfb9fc5364112896568b4e96df"
+      "download": null,
+      "sha256": null,
+      "retired": true
     }
   ]
 }

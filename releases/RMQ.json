@@ -2,14 +2,25 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.4.1",
+      "min_game_version": ">=1.0.0",
+      "max_game_version": null,
+      "game_version": ">=1.0.0",
+      "date": "2026-08-19",
+      "changelog": "Fixed water shattering at low zoom, where simplification had fattened narrow streams into slivers far wider than the real watercourse, and rebalanced demand-point detail so mid-density residential areas hold consistent detail while city centres keep full resolution.",
+      "download": "https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.3.1/RMQ.zip",
+      "sha256": "f257ccfdf6d8a09aafa122cc578e43c6c4f32e1a3772c24e72f6159ca4c8f727"
+    },
+    {
       "version": "0.4.0",
       "min_game_version": ">=1.0.0",
       "max_game_version": null,
       "game_version": ">=1.0.0",
       "date": "2026-08-13",
       "changelog": "Sharpened commute routing to match the national travel survey, corrected village residential counts against the census, and removed remaining malformed building footprints and over-drawn foundations.",
-      "download": "https://github.com/ahkimn/subwaybuilder-tw-maps/releases/download/0.3.0/RMQ.zip",
-      "sha256": "9f27e5b9255df09b7941d71f595cee67e1fb1d2ee868f136ff5b11b1daa5f054"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.3.0",
